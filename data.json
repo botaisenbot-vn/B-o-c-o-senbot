@@ -1,0 +1,113 @@
+{
+  "updated": "11/07/2026 17:00 (GMT+7)",
+  "pnl": {
+    "weeks": {
+      "1": {
+        "rev": 589000000,
+        "cost": 350000000,
+        "cats": {
+          "CP Nhập hàng (COGS)": 300000000,
+          "CP Khác": 45400000,
+          "CP Vận hành": 3451118,
+          "CP Công cụ & Dụng cụ": 988200,
+          "CP Vận chuyển": 50000
+        }
+      },
+      "2": {
+        "rev": 156000000,
+        "cost": 108000000,
+        "cats": {
+          "CP Lương & Phúc lợi": 106754734,
+          "CP Vận chuyển": 1000000,
+          "CP Khác": 58650
+        }
+      }
+    },
+    "alerts": [
+      {
+        "level": "orange",
+        "msg": "Tuần 2 chưa đủ dữ liệu (mới 8-10/7)"
+      }
+    ]
+  },
+  "sales": {
+    "Hằng Đỗ": {
+      "w1": {
+        "don": 7,
+        "inbox": 28,
+        "rate": "25%",
+        "commission": 950000,
+        "posts": 12
+      },
+      "w2": {
+        "don": 7,
+        "inbox": 29,
+        "rate": "27%",
+        "commission": 1250000,
+        "posts": 6
+      },
+      "note": "hỗ trợ trước và sau bán cho khách, đẩy được 1 máy T50 omni"
+    },
+    "Bùi Quang Hiếu": {
+      "w1": {
+        "don": 14,
+        "inbox": 45,
+        "rate": "31%",
+        "commission": 2150000,
+        "posts": 10
+      },
+      "w2": {
+        "don": 8,
+        "inbox": 24,
+        "rate": "33%",
+        "commission": 1300000,
+        "posts": 6
+      },
+      "note": ""
+    }
+  },
+  "si": {
+    "w1": {
+      "total": 160000000,
+      "count": 10
+    },
+    "w2": {
+      "total": 99000000,
+      "count": 5
+    }
+  },
+  "marketing": {
+    "Thùy Dương": {
+      "content": {
+        "w1": "10",
+        "w2": "3"
+      },
+      "seeding": {
+        "w1": "57",
+        "w2": "22"
+      },
+      "leads": {
+        "w1": "7",
+        "w2": "5"
+      },
+      "alerts": [
+        {
+          "level": "red",
+          "msg": "ADS trống 2 tuần liền"
+        }
+      ]
+    },
+    "Thu Chinh": {
+      "videos": {
+        "w1": "12",
+        "w2": "8"
+      },
+      "alerts": [
+        {
+          "level": "orange",
+          "msg": "Hook rate 43% — dưới mục tiêu"
+        }
+      ]
+    }
+  }
+}

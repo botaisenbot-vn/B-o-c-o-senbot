@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Senbot Dashboard — Báo cáo tự động</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f0f2f5;color:#1a1a2e}
+.header{background:linear-gradient(135deg,#1a1a2e,#2E86AB);color:white;padding:20px 30px;text-align:center}
+.header h1{font-size:24px;margin-bottom:4px}
+.header .time{font-size:13px;opacity:.7}
+.container{max-width:1300px;margin:20px auto;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:20px}
+.card{background:white;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.08);overflow:hidden}
+.card-header{padding:14px 20px;font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #eee}
+.card-body{padding:16px 20px}
+.kpi-row{display:flex;gap:12px;margin-bottom:16px}
+.kpi{flex:1;background:#f8f9fa;border-radius:8px;padding:12px;text-align:center}
+.kpi-value{font-size:22px;font-weight:700}
+.kpi-label{font-size:11px;color:#666;margin-top:2px}
+.kpi.up .kpi-value{color:#27AE60}
+.kpi.down .kpi-value{color:#C0392B}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;padding:8px 10px;border-bottom:2px solid #eee;color:#666;font-weight:600;font-size:11px;text-transform:uppercase}
+td{padding:8px 10px;border-bottom:1px solid #f0f0f0}
+tr:last-child td{border-bottom:none}
+.num{text-align:right;font-weight:600}
+.arrow-up{color:#27AE60}
+.arrow-down{color:#C0392B}
+.arrow-same{color:#999}
+.tag{padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600}
+.tag-red{background:#fde8e8;color:#C0392B}
+.tag-green{background:#e8f5e9;color:#27AE60}
+.tag-orange{background:#fff3e0;color:#E67E22}
+.tag-gray{background:#f0f0f0;color:#666}
+.alert{padding:10px 14px;border-radius:8px;margin-top:8px;font-size:12px}
+.alert-red{background:#fde8e8;color:#C0392B;border-left:3px solid #C0392B}
+.alert-orange{background:#fff3e0;color:#E67E22;border-left:3px solid #E67E22}
+.full-width{grid-column:1/-1}
+.section-title{font-size:13px;color:#666;margin:12px 0 6px;font-weight:600}
+.empty{text-align:center;padding:30px;color:#999;font-size:13px}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>📊 Senbot Dashboard</h1>
+<div class="time" id="updateTime">Đang tải...</div>
+</div>
+<div class="container" id="app">
+<div class="empty">⏳ Đang tải dữ liệu...</div>
+</div>
+
+<script>
+async function loadData() {
+    try {
+        const r = await fetch('data.json');
+        return await r.json();
+    } catch(e) {
+        return null;
+    }
+}
+
+function arrow(a,b) {
+    if (a === b) return '<span class="arrow-same">➖</span>';
+    if (b > a) return '<span class="arrow-up">🔺</span>';
+    return '<span class="arrow-down">🔻</span>';
+}
+
+function pct(a,b) {
+    if (!a || a===0) return '';
+    const d = ((b-a)/a*100).toFixed(0);
+    return d>0 ? '+' + d + '%' : d + '%';
+}
+
+function fmoney(v) {
+    if (!v) return '—';
+    if (v >= 1e9) return (v/1e9).toFixed(2) + ' tỷ';
+    if (v >= 1e6) return (v/1e6).toFixed(0) + 'M';
+    if (v >= 1e3) return (v/1e3).toFixed(0) + 'K';
+    return v.toLocaleString() + 'đ';
+}
+
+function renderPnl(data) {
+    if (!data || !data.weeks) return '';
+    const w = data.weeks;
+    const keys = Object.keys(w).sort((a,b)=>a-b);
+    if (keys.length < 2) return '';
+    const w1 = w[keys[keys.length-2]], w2 = w[keys[keys.length-1]];
+    const gp1 = w1.rev - w1.cost, gp2 = w2.rev - w2.cost;
+    
+    let h = '<div class="kpi-row">';
+    h += `<div class="kpi ${gp2>gp1?'up':'down'}"><div class="kpi-value">${fmoney(w2.rev)}</div><div class="kpi-label">Doanh thu Tuần ${keys[keys.length-1]}</div></div>`;
+    h += `<div class="kpi ${gp2>gp1?'up':'down'}"><div class="kpi-value">${fmoney(w2.cost)}</div><div class="kpi-label">Chi phí</div></div>`;
+    h += `<div class="kpi ${gp2>gp1?'up':'down'}"><div class="kpi-value">${fmoney(gp2)}</div><div class="kpi-label">Lãi gộp (${w2.rev?(gp2/w2.rev*100).toFixed(1):0}%)</div></div>`;
+    h += '</div>';
+    
+    h += '<table><tr><th>Chỉ số</th><th>Tuần trước</th><th>Tuần này</th><th>Thay đổi</th></tr>';
+    h += `<tr><td>Doanh thu</td><td class="num">${fmoney(w1.rev)}</td><td class="num">${fmoney(w2.rev)}</td><td class="num">${arrow(w1.rev,w2.rev)} ${pct(w1.rev,w2.rev)}</td></tr>`;
+    h += `<tr><td>Chi phí</td><td class="num">${fmoney(w1.cost)}</td><td class="num">${fmoney(w2.cost)}</td><td class="num">${arrow(w1.cost,w2.cost)} ${pct(w1.cost,w2.cost)}</td></tr>`;
+    h += `<tr><td><b>Lãi gộp</b></td><td class="num"><b>${fmoney(gp1)}</b></td><td class="num"><b>${fmoney(gp2)}</b></td><td class="num">${arrow(gp1,gp2)} ${pct(gp1,gp2)}</td></tr>`;
+    
+    if (w2.cats) {
+        h += '<tr><td colspan="4"><span class="section-title">📊 Cơ cấu chi phí</span></td></tr>';
+        for (const [cat,val] of Object.entries(w2.cats).sort((a,b)=>b[1]-a[1])) {
+            const p = w2.cost ? (val/w2.cost*100).toFixed(1) : 0;
+            h += `<tr><td>${cat}</td><td></td><td class="num">${fmoney(val)}</td><td class="num">${p}%</td></tr>`;
+        }
+    }
+    h += '</table>';
+    
+    if (data.alerts) {
+        for (const a of data.alerts) {
+            h += `<div class="alert alert-${a.level||'red'}">${a.icon||'⚠️'} ${a.msg}</div>`;
+        }
+    }
+    return h;
+}
+
+function renderSales(data) {
+    if (!data || !data.w1) return '';
+    const w1 = data.w1, w2 = data.w2;
+    
+    let h = '<div class="kpi-row">';
+    h += `<div class="kpi ${(w2.don||0)>(w1.don||0)?'up':'down'}"><div class="kpi-value">${w2.don||'—'}</div><div class="kpi-label">Đơn chốt</div></div>`;
+    h += `<div class="kpi"><div class="kpi-value">${w2.inbox||'—'}</div><div class="kpi-label">Inbox</div></div>`;
+    h += `<div class="kpi"><div class="kpi-value">${w2.rate||'—'}</div><div class="kpi-label">Tỷ lệ chốt</div></div>`;
+    h += `<div class="kpi"><div class="kpi-value">${fmoney(w2.commission)}</div><div class="kpi-label">Hoa hồng</div></div>`;
+    h += '</div>';
+    
+    h += '<table><tr><th>Chỉ số</th><th>Tuần trước</th><th>Tuần này</th><th>Thay đổi</th></tr>';
+    h += `<tr><td>Đơn chốt</td><td class="num">${w1.don||'—'}</td><td class="num">${w2.don||'—'}</td><td class="num">${arrow(w1.don||0,w2.don||0)}</td></tr>`;
+    h += `<tr><td>Tổng inbox</td><td class="num">${w1.inbox||'—'}</td><td class="num">${w2.inbox||'—'}</td><td class="num">${arrow(w1.inbox||0,w2.inbox||0)}</td></tr>`;
+    h += `<tr><td>Tỷ lệ chốt</td><td class="num">${w1.rate||'—'}</td><td class="num">${w2.rate||'—'}</td><td class="num">${arrow(parseFloat(w1.rate)||0,parseFloat(w2.rate)||0)}</td></tr>`;
+    h += `<tr><td>Hoa hồng</td><td class="num">${fmoney(w1.commission)}</td><td class="num">${fmoney(w2.commission)}</td><td class="num">${arrow(w1.commission||0,w2.commission||0)}</td></tr>`;
+    h += '</table>';
+    
+    if (data.note) h += `<div style="margin-top:8px;font-size:12px;color:#666;">💬 ${data.note}</div>`;
+    return h;
+}
+
+function renderSi(data) {
+    if (!data || !data.w1) return '';
+    const w1 = data.w1, w2 = data.w2;
+    
+    let h = '<div class="kpi-row">';
+    h += `<div class="kpi ${(w2.total||0)>(w1.total||0)?'up':'down'}"><div class="kpi-value">${fmoney(w2.total)}</div><div class="kpi-label">Doanh số</div></div>`;
+    h += `<div class="kpi"><div class="kpi-value">${w2.count||'—'}</div><div class="kpi-label">Số đơn</div></div>`;
+    h += `<div class="kpi"><div class="kpi-value">${fmoney(w2.total&&w2.count?Math.floor(w2.total/w2.count):0)}</div><div class="kpi-label">TB/đơn</div></div>`;
+    h += '</div>';
+    
+    h += '<table><tr><th>Chỉ số</th><th>Tuần trước</th><th>Tuần này</th></tr>';
+    h += `<tr><td>Doanh số</td><td class="num">${fmoney(w1.total)}</td><td class="num">${fmoney(w2.total)}</td></tr>`;
+    h += `<tr><td>Số đơn</td><td class="num">${w1.count||'—'}</td><td class="num">${w2.count||'—'}</td></tr>`;
+    
+    if (w2.top) {
+        h += '<tr><td colspan="3"><span class="section-title">🔥 Top sản phẩm</span></td></tr>';
+        for (const [name,val] of Object.entries(w2.top)) {
+            h += `<tr><td>${name}</td><td></td><td class="num">${fmoney(val)}</td></tr>`;
+        }
+    }
+    h += '</table>';
+    return h;
+}
+
+function renderMarketing(data) {
+    if (!data) return '';
+    let h = '<table><tr><th>Chỉ số</th><th>Tuần trước</th><th>Tuần này</th></tr>';
+    
+    if (data.content) h += `<tr><td>Content (bài)</td><td class="num">${data.content.w1||'—'}</td><td class="num">${data.content.w2||'—'}</td></tr>`;
+    if (data.videos) h += `<tr><td>Video mới</td><td class="num">${data.videos.w1||'—'}</td><td class="num">${data.videos.w2||'—'}</td></tr>`;
+    if (data.seeding) h += `<tr><td>Seeding (bài)</td><td class="num">${data.seeding.w1||'—'}</td><td class="num">${data.seeding.w2||'—'}</td></tr>`;
+    if (data.leads) h += `<tr><td>Lead</td><td class="num">${data.leads.w1||'—'}</td><td class="num">${data.leads.w2||'—'}</td></tr>`;
+    h += '</table>';
+    
+    if (data.alerts) {
+        for (const a of data.alerts) {
+            h += `<div class="alert alert-${a.level||'red'}">${a.msg}</div>`;
+        }
+    }
+    return h;
+}
+
+async function render() {
+    const data = await loadData();
+    const app = document.getElementById('app');
+    
+    if (!data) {
+        app.innerHTML = '<div class="empty">❌ Không tải được dữ liệu</div>';
+        return;
+    }
+    
+    document.getElementById('updateTime').textContent = 'Cập nhật: ' + (data.updated || '—');
+    
+    let html = '';
+    
+    // P&L Card — full width
+    if (data.pnl) {
+        html += '<div class="card full-width"><div class="card-header">💰 Thu Chi — Senbot</div><div class="card-body">' + renderPnl(data.pnl) + '</div></div>';
+    }
+    
+    // Sales cards
+    if (data.sales) {
+        for (const [name, d] of Object.entries(data.sales)) {
+            const icon = name.includes('Hiếu') ? '🛒' : '🛒';
+            html += `<div class="card"><div class="card-header">${icon} Kinh doanh — ${name}</div><div class="card-body">${renderSales(d)}</div></div>`;
+        }
+    }
+    
+    // Si card
+    if (data.si) {
+        html += '<div class="card"><div class="card-header">🏭 Khách sỉ — Thúy Hiền</div><div class="card-body">' + renderSi(data.si) + '</div></div>';
+    }
+    
+    // Marketing cards
+    if (data.marketing) {
+        for (const [name, d] of Object.entries(data.marketing)) {
+            const icon = name.includes('Chinh') ? '🎬' : '📢';
+            html += `<div class="card"><div class="card-header">${icon} Marketing — ${name}</div><div class="card-body">${renderMarketing(d)}</div></div>`;
+        }
+    }
+    
+    app.innerHTML = html || '<div class="empty">📭 Chưa có dữ liệu</div>';
+}
+
+render();
+</script>
+</body>
+</html>
