@@ -21,19 +21,15 @@ td{padding:8px 10px;border-bottom:1px solid #f0f0f0}
 tr:last-child td{border-bottom:none}
 .num{text-align:right;font-weight:600}
 .g{color:#27AE60}.r{color:#C0392B}.o{color:#E67E22}.gr{color:#999}
-.tag{display:inline-block;padding:1px 7px;border-radius:10px;font-size:10px;font-weight:600}
-.tg{background:#e8f5e9;color:#27AE60}.tr{background:#ffeaea;color:#C0392B}.to{background:#fff3e0;color:#E67E22}
 .alert{padding:8px 12px;border-radius:6px;margin:4px 0;font-size:12px}
 .ar{background:#ffeaea;color:#C0392B;border-left:3px solid #C0392B}
 .ao{background:#fff8ee;color:#E67E22;border-left:3px solid #E67E22}
-.ag{background:#eafaf1;color:#27AE60;border-left:3px solid #27AE60}
 .split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0}
 .split>div{background:#f8f9fb;border-radius:8px;padding:10px 14px;font-size:13px}
 .split .good b{color:#27AE60}.split .bad b{color:#C0392B}
 .conclusion{background:#f0f7ff;border-left:3px solid #2E86AB;padding:12px 16px;border-radius:6px;margin-top:12px;font-size:13px}
 .empty{text-align:center;padding:40px;color:#999}
 .small{font-size:12px;color:#888}
-hr{border:none;border-top:1px dashed #ddd;margin:12px 0}
 </style>
 </head>
 <body>
@@ -42,76 +38,73 @@ hr{border:none;border-top:1px dashed #ddd;margin:12px 0}
 
 <script>
 function fm(v){if(!v||v===0)return'—';v=Math.round(v);if(v>=1e9)return(v/1e9).toFixed(2)+' tỷ';if(v>=1e6)return Math.round(v/1e6)+'M';return v.toLocaleString()+'đ'}
-function ar(a,b){if(a===b)return'➖';return b>a?'🔺':'🔻'}
-function pct(a,b){if(!a)return'';const d=((b-a)/a*100).toFixed(0);return(d>0?'+':'')+d+'%'}
-function c(n,x){return`<span class="${x}">${n}</span>`}
 
-function tbl(hd,rows,cls){
-  let h='<table>';if(hd)h+='<tr>'+hd.map(x=>`<th>${x}</th>`).join('')+'</tr>';
-  for(const r of rows){
-    if(r===null){h+='<tr><td colspan="99"><hr></td></tr>';continue}
-    const cl=cls&&cls.includes(r[0])?' class="total"':'';
-    h+='<tr'+cl+'>'+r.map((x,i)=>`<td${i>0?' class="num"':''}>${x}</td>`).join('')+'</tr>';
+function tbl(hd,rows){
+  var h='<table>';
+  if(hd&&hd.length)h+='<tr>'+hd.map(function(x){return'<th>'+x+'</th>'}).join('')+'</tr>';
+  if(rows)for(var i=0;i<rows.length;i++){
+    var r=rows[i];
+    if(!r||r.length===0)continue;
+    if(r[0]===null){h+='<tr><td colspan="99"><hr style="margin:0;border:none;border-top:1px dashed #ddd"></td></tr>';continue}
+    h+='<tr>'+r.map(function(x,j){return'<td'+(j>0?' class="num"':'')+'>'+(x||'')+'</td>'}).join('')+'</tr>';
   }
   return h+'</table>';
 }
 
 function renderSection(d){
   if(!d||!d.type)return'';
-  let h='';
-  
-  // Title
-  const icons={pnl:'💰',sales:'🛒',si:'🏭',mkt_video:'🎬',mkt_ads:'📢'};
-  h+=`<div class="report"><div class="rtitle">${icons[d.type]||'📊'} ${d.title||''}</div><div class="rbody">`;
+  var h='<div class="report"><div class="rtitle">'+ (d.title||'') +'</div><div class="rbody">';
 
   // KPI cards
-  if(d.kpis){
+  if(d.kpis&&d.kpis.length){
     h+='<div class="split">';
-    for(const k of d.kpis){
-      const cl=k.up?'g':(k.down?'r':'');
-      h+=`<div><div style="font-size:22px;font-weight:700" class="${cl}">${k.val}</div><div class="small">${k.label}</div></div>`;
+    for(var i=0;i<d.kpis.length;i++){
+      var k=d.kpis[i],cl='';
+      if(k.up)cl='g';else if(k.down)cl='r';
+      h+='<div><div style="font-size:22px;font-weight:700" class="'+cl+'">'+k.val+'</div><div class="small">'+k.label+'</div></div>';
     }
     h+='</div>';
   }
 
   // Tables
-  if(d.tables)for(const t of d.tables){
-    if(t.title)h+=`<h3>${t.title}</h3>`;
-    h+=tbl(t.headers,t.rows,t.totalRows);
+  if(d.tables)for(var ti=0;ti<d.tables.length;ti++){
+    var t=d.tables[ti];
+    if(t.title)h+='<h3>'+t.title+'</h3>';
+    h+=tbl(t.headers,t.rows);
   }
 
   // Good/Bad
   if(d.good||d.bad){
     h+='<div class="split">';
-    if(d.good)h+=`<div class="good"><b>✅ Mặt tốt</b><br>${d.good.map(x=>'• '+x).join('<br>')}</div>`;
-    if(d.bad)h+=`<div class="bad"><b>❌ Cần cải thiện</b><br>${d.bad.map(x=>'• '+x).join('<br>')}</div>`;
+    if(d.good&&d.good.length)h+='<div class="good"><b>✅ Mặt tốt</b><br>'+d.good.map(function(x){return'• '+x}).join('<br>')+'</div>';
+    if(d.bad&&d.bad.length)h+='<div class="bad"><b>❌ Cần cải thiện</b><br>'+d.bad.map(function(x){return'• '+x}).join('<br>')+'</div>';
     h+='</div>';
   }
 
   // Self note
-  if(d.note)h+=`<div class="split"><div>💬 <b>Tự nhận xét:</b><br>👍 ${d.note.good||'—'}<br>👎 ${d.note.bad||'—'}</div></div>`;
+  if(d.note)h+='<div class="split"><div>💬 <b>Tự nhận xét:</b><br>👍 '+(d.note.good||'—')+'<br>👎 '+(d.note.bad||'—')+'</div></div>';
 
   // Alerts
-  if(d.alerts)for(const a of d.alerts)h+=`<div class="${a.level==='red'?'ar':a.level==='orange'?'ao':'ag'}">${a.icon||''} ${a.msg}</div>`;
+  if(d.alerts)for(var ai=0;ai<d.alerts.length;ai++){
+    var a=d.alerts[ai],cls=a.level==='red'?'ar':(a.level==='orange'?'ao':'');
+    h+='<div class="alert '+cls+'">'+(a.icon||'')+' '+a.msg+'</div>';
+  }
 
   // Conclusion
-  if(d.conclusion)h+=`<div class="conclusion">📌 <b>Kết luận:</b> ${d.conclusion}</div>`;
+  if(d.conclusion)h+='<div class="conclusion">📌 <b>Kết luận:</b> '+d.conclusion+'</div>';
 
   h+='</div></div>';
   return h;
 }
 
-async function main(){
-  try{
-    const r=await fetch('data.json');
-    const d=await r.json();
-    document.getElementById('t').textContent='Cập nhật: '+(d.updated||'—');
-    let h='';
-    if(d.sections)for(const s of d.sections)h+=renderSection(s);
-    document.getElementById('app').innerHTML=h||'<div class="empty">📭 Chưa có dữ liệu</div>';
-  }catch(e){document.getElementById('app').innerHTML='<div class="empty">❌ Lỗi</div>'}
-}
-main();
+fetch('data.json').then(function(r){return r.json()}).then(function(d){
+  document.getElementById('t').textContent='Cập nhật: '+(d.updated||'—');
+  var h='';
+  if(d.sections)for(var i=0;i<d.sections.length;i++)h+=renderSection(d.sections[i]);
+  document.getElementById('app').innerHTML=h||'<div class="empty">📭 Chưa có dữ liệu</div>';
+}).catch(function(e){
+  document.getElementById('app').innerHTML='<div class="empty">❌ Lỗi: '+e.message+'</div>';
+});
 </script>
 </body>
 </html>
