@@ -70,7 +70,12 @@ def api(method, path, data=None):
         else:
             r = requests.post(url, json=data, timeout=30)
         if r.status_code == 200:
-            return r.json()
+            try:
+                return r.json()
+            except:
+                log(f"API non-JSON response: {r.text[:200]}")
+                return None
+        log(f"API {method} {path}: HTTP {r.status_code} - {r.text[:200]}")
         return None
     except Exception as e:
         log(f"API error: {e}")
