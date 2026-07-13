@@ -12,10 +12,11 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
 API_BASE = "http://local.adspower.net:50325"
-STATE_FILE = Path("nick_state.json")
-INBOX_LOG = Path("inbox_log.json")
+SCRIPT_DIR = Path(__file__).parent if '__file__' in dir() else Path.cwd()
+COOKIE_DIR = SCRIPT_DIR / "cookies/Cookie 3"
+STATE_FILE = SCRIPT_DIR / "nick_state.json"
+INBOX_LOG = SCRIPT_DIR / "inbox_log.json"
 
 def log(msg):
     ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
