@@ -145,8 +145,11 @@ def process_nick(name, info):
     
     # Open browser
     result = open_browser(uid)
-    if not result or result.get("code") != 0:
-        log("Open failed")
+    if not result:
+        log("Open failed - API returned None")
+        return False
+    if result.get("code") != 0:
+        log(f"Open failed - code={result.get('code')} msg={result.get('msg','?')}")
         return False
     
     ws = result.get("data", {}).get("ws", {})
