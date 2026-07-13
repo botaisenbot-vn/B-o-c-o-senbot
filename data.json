@@ -825,25 +825,25 @@
       "title": "FB CLONE INBOX — Tin Nhắn & Thông Báo",
       "kpis": [
         {
-          "val": "—",
-          "label": "💬 Tin nhắn mới"
+          "val": "1",
+          "label": "💬 Tổng tin nhắn"
         },
         {
-          "val": "—",
+          "val": "1",
+          "label": "💬 Messenger"
+        },
+        {
+          "val": "0",
           "label": "🔔 Thông báo"
         },
         {
-          "val": "—",
-          "label": "👤 Nick hoạt động"
-        },
-        {
-          "val": "—",
-          "label": "🕐 Cập nhật gần nhất"
+          "val": "13/07/2026 10:20",
+          "label": "🕐 Cập nhật"
         }
       ],
       "tables": [
         {
-          "title": "📬 Tin nhắn gần đây",
+          "title": "📬 Tin nhắn & thông báo gần đây",
           "headers": [
             "Nick",
             "Loại",
@@ -852,15 +852,15 @@
           ],
           "rows": [
             [
-              "Chưa có dữ liệu",
-              "",
-              "Chạy CHECK_INBOX.bat để bắt đầu",
-              ""
+              "FB_Duong_da_Thao",
+              "💬 inbox",
+              "MdRocky Bai\nYou're now friends with MdRocky.\n  ·\n1y",
+              "2026-07-13 17:20"
             ]
           ]
         }
       ],
-      "conclusion": "Dữ liệu tự động cập nhật mỗi 30 phút từ máy Đại Ca."
+      "conclusion": "Cập nhật mỗi 30 phút từ máy Đại Ca. 1 tin nhắn đã ghi nhận."
     }
   ]
 }
