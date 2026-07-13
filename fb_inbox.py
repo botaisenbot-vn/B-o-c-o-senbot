@@ -134,7 +134,7 @@ def main():
     nick_list = list(profiles.items())
     random.shuffle(nick_list)
     
-    for name, info in nick_list[:4]:
+    for name, info in nick_list:  # Check ALL nicks
         uid = info["id"]
         log(f"  👤 {name}...")
         
