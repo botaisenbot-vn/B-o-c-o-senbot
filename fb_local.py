@@ -158,9 +158,15 @@ def process_nick(name, info):
         return False
     
     ws = result.get("data", {}).get("ws", {})
-    debug_port = ws.get("puppeteer", "")
+    debug_port = result.get("data", {}).get("debug_port", "")
     if not debug_port:
-        debug_port = result.get("data", {}).get("debug_port", "")
+        # Fallback: parse from puppeteer URL
+        puppeteer = ws.get("puppeteer", "")
+        if puppeteer:
+            import re
+            m = re.search(r'127\.0\.0\.1:(\d+)', puppeteer)
+            if m:
+                debug_port = m.group(1)
     log(f"Browser: port={debug_port}")
     
     try:
