@@ -105,26 +105,30 @@ def check_one_nick(name, user_id):
     return new_messages
 
 def main():
-    log("🔍 Checking inbox for all nicks...")
+    log("🔍 Checking inbox...")
     
     state = json.loads(STATE_FILE.read_text()) if STATE_FILE.exists() else {}
     profiles = state.get("profiles", {})
     
     if not profiles:
-        log("No profiles found!")
+        log("No profiles!")
         return
     
     inbox_log = load_inbox_log()
     all_new = []
     
-    for name, info in list(profiles.items())[:3]:  # Check 3 nicks per run
+    # Only check 3 nicks per run to be fast
+    nick_list = list(profiles.items())
+    random.shuffle(nick_list)
+    
+    for name, info in nick_list[:3]:
         uid = info["id"]
         log(f"  👤 {name}...")
         
         msgs = check_one_nick(name, uid)
         if msgs:
             for m in msgs:
-                key = f"{name}_{m.get('type')}_{m.get('from','')[:50]}_{datetime.now().strftime('%Y%m%d')}"
+                key = f"{name}_{m.get('type')}_{m.get('from','')[:50]}_{datetime.now().strftime('%Y%m%d%H')}"
                 if key not in inbox_log:
                     inbox_log[key] = {"time": datetime.now().isoformat(), **m}
                     all_new.append(m)
@@ -134,10 +138,17 @@ def main():
     save_inbox_log(inbox_log)
     
     if all_new:
-        log(f"\n📬 {len(all_new)} NEW messages!")
+        log(f"\n📬 {len(all_new)} NEW!")
         for m in all_new:
             type_icon = "💬" if m["type"] == "inbox" else "🔔"
-            log(f"  {type_icon} [{m['nick']}] {m.get('from', m.get('content',''))[:100]}")
+            msg = f"{type_icon} [{m['nick']}] {m.get('from', m.get('content',''))[:150]}"
+            log(f"  {msg}")
+            # GỬI VỀ VPS ĐỂ ĐẨY LÊN WEB
+            try:
+                import requests
+                requests.post("http://72.60.232.73:8765", json={key: inbox_log[key]}, timeout=5)
+            except:
+                pass  # Server chưa chạy cũng ko sao
     else:
         log("✅ No new messages")
 
