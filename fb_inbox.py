@@ -114,7 +114,7 @@ def main():
     if state_file.exists():
         try:
             state = json.loads(state_file.read_text())
-            profiles = state.get("profiles", {})
+            profiles = state
             log(f"Profiles found: {len(profiles)}")
         except Exception as e:
             log(f"State parse error: {e}")
