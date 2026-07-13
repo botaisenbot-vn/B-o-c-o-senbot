@@ -312,7 +312,7 @@ if __name__ == "__main__":
         save_today({"date": datetime.now().strftime("%Y-%m-%d"), "ran": []})
         sys.exit(0)
     
-    batch = random.sample(available, random.randint(2, min(4, len(available))))
+    batch = random.sample(available, random.randint(1, min(4, len(available))))
     log(f"Batch: {len(batch)}/{len(profiles)} nicks")
     
     for name, info in batch:
