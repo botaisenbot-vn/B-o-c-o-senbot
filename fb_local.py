@@ -88,10 +88,10 @@ def get_profiles():
     return []
 
 def open_browser(user_id):
-    return api("POST", "/api/v1/browser/start", {"user_id": user_id})
+    return api("GET", f"/api/v1/browser/start?user_id={user_id}")
 
 def close_browser(user_id):
-    return api("POST", "/api/v1/browser/stop", {"user_id": user_id})
+    return api("GET", f"/api/v1/browser/stop?user_id={user_id}")
 
 def load_state():
     if STATE_FILE.exists():
