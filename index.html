@@ -10,23 +10,17 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f6fa;color:#1a
 .header{background:linear-gradient(135deg,#1a1a2e,#2E86AB);color:#fff;padding:18px 24px;text-align:center}
 .header h1{font-size:22px}.header span{font-size:12px;opacity:.7}
 .container{max-width:900px;margin:0 auto;padding:0 16px 40px}
-
-.tabs{display:flex;gap:0;background:#fff;border-radius:12px 12px 0 0;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06);margin-top:20px}
-.tab{flex:1;padding:16px;border:none;background:#f8f9fb;font-size:15px;font-weight:600;cursor:pointer;color:#888;transition:all .2s;border-bottom:3px solid transparent;font-family:inherit}
+.tabs{display:flex;background:#fff;border-radius:12px 12px 0 0;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06);margin-top:20px}
+.tab{flex:1;padding:16px 8px;border:none;background:#f8f9fb;font-size:14px;font-weight:600;cursor:pointer;color:#888;transition:all .2s;border-bottom:3px solid transparent;font-family:inherit}
 .tab:hover{background:#f0f0f0;color:#555}
 .tab.active{background:#fff;color:#2E86AB;border-bottom:3px solid #2E86AB}
-
 .tab-content{background:#fff;padding:20px 24px;border-radius:0 0 12px 12px;box-shadow:0 1px 3px rgba(0,0,0,.06);margin-bottom:20px}
-
 .report{margin-bottom:24px}
-.report:last-child{margin-bottom:0}
 .rtitle{font-size:16px;font-weight:700;padding-bottom:10px;border-bottom:2px solid #f0f0f0;margin-bottom:14px}
 h3{font-size:15px;margin:16px 0 8px;color:#2E86AB}
-h3:first-child{margin-top:0}
 table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0 14px}
 th{text-align:left;padding:8px 10px;background:#f0f4f8;border-bottom:2px solid #dde;font-weight:600;color:#555;font-size:11px}
 td{padding:8px 10px;border-bottom:1px solid #f0f0f0}
-tr:last-child td{border-bottom:none}
 .num{text-align:right;font-weight:600}
 .g{color:#27AE60}.r{color:#C0392B}
 .alert{padding:8px 12px;border-radius:6px;margin:4px 0;font-size:12px}
@@ -40,18 +34,168 @@ tr:last-child td{border-bottom:none}
 </style>
 </head>
 <body>
-<div class="header"><h1>Senbot Dashboard</h1><span>Cap nhat: 11/07/2026 17:30 (GMT+7)</span></div>
+<div class="header"><h1>Senbot Dashboard</h1><span>11/07/2026 17:30 (GMT+7)</span></div>
 <div class="container">
-<div class="tabs"><button class="tab active" onclick="openTab(event,'tai_chinh')">💰 Tai chinh</button><button class="tab " onclick="openTab(event,'kinh_doanh')">🛒 Kinh doanh</button><button class="tab " onclick="openTab(event,'marketing')">📢 Marketing</button></div>
-<div id="tai_chinh" class="tab-content" style="display:block"><div class="report"><div class="rtitle">TỔNG KẾT THU CHI — THÁNG 7/2026 (2 TUẦN ĐẦU)</div><div class="rbody"><div class="split"><div><div style="font-size:22px;font-weight:700" class="">589M / 156M</div><div class="small">💰 Doanh thu (T1 / T2)</div></div><div><div style="font-size:22px;font-weight:700" class="">350M / 108M</div><div class="small">💸 Chi phí (T1 / T2)</div></div><div><div style="font-size:22px;font-weight:700" class="">239M / 48M</div><div class="small">📈 Lãi gộp (T1 / T2)</div></div><div><div style="font-size:22px;font-weight:700" class="">40.6% / 30.8%</div><div class="small">📊 Biên lợi nhuận</div></div></div><h3>📊 DOANH THU</h3><table><tr><th></th><th>Tuần 1 (1-7/7)</th><th>Tuần 2 (8-14/7)</th><th>Tổng</th></tr><tr><td class="">Doanh thu</td><td class="num">589M</td><td class="num">156M</td><td class="num">745M</td></tr><tr><td class="">Số giao dịch</td><td class="num">~48 đơn</td><td class="num">~15 đơn</td><td class="num">~63 đơn</td></tr></table><h3>💸 CHI PHÍ</h3><table><tr><th></th><th>Tuần 1</th><th>Tuần 2</th></tr><tr><td class="">Tổng chi phí thực</td><td class="num">350M</td><td class="num">108M</td></tr><tr><td class="">Nộp quỹ (không phải CP)</td><td class="num">3M</td><td class="num">63M</td></tr></table><h3>📊 Cơ cấu chi phí Tuần 1</h3><table><tr><th>Danh mục</th><th>Số tiền</th><th>Tỷ trọng</th></tr><tr><td class="">🏭 CP Nhập hàng (COGS)</td><td class="num">300M</td><td class="num">85.7%</td></tr><tr><td class="">❓ CP Khác</td><td class="num">45M</td><td class="num">13.0%</td></tr><tr><td class="">⚙️ CP Vận hành</td><td class="num">3.5M</td><td class="num">1.0%</td></tr><tr><td class="">🛠️ CP Công cụ & Dụng cụ</td><td class="num">988K</td><td class="num">0.3%</td></tr><tr><td class="">🚚 CP Vận chuyển</td><td class="num">50K</td><td class="num">0.0%</td></tr></table><h3>📊 Cơ cấu chi phí Tuần 2</h3><table><tr><th>Danh mục</th><th>Số tiền</th><th>Tỷ trọng</th></tr><tr><td class="">👥 CP Lương & Phúc lợi</td><td class="num">107M</td><td class="num">99.0%</td></tr><tr><td class="">🚚 CP Vận chuyển</td><td class="num">1M</td><td class="num">0.9%</td></tr><tr><td class="">❓ CP Khác</td><td class="num">59K</td><td class="num">0.1%</td></tr></table><h3>📈 LỢI NHUẬN GỘP</h3><table><tr><th></th><th>Tuần 1</th><th>Tuần 2</th></tr><tr><td class="">Doanh thu</td><td class="num">589M</td><td class="num">156M</td></tr><tr><td class="">Chi phí thực</td><td class="num">(350M)</td><td class="num">(108M)</td></tr><tr><td class=""><b>Lợi nhuận gộp</b></td><td class="num"><b>239M (40.6%)</b></td><td class="num"><b>48M (30.8%)</b></td></tr></table><div class="split"><div class="good"><b>Mat tot</b><br>* Biên lợi nhuận tuần 1 rất tốt (40.6%)<br>* Doanh thu 2 tuần đạt 745M<br>* CP nhập hàng chiếm tỷ trọng hợp lý (85.7%)</div><div class="bad"><b>Can cai thien</b><br>* CP Khác 45M tuần 1 (40M tạm ứng du lịch — cần quyết toán)<br>* Tuần 2 chưa đủ dữ liệu (mới 8-10/7, thiếu 11-14/7)<br>* Chưa có CP nhập hàng tuần 2</div></div><div class="alert ao">🟡 Tuần 2 còn thiếu dữ liệu 11-14/7 — cần cập nhật thêm</div><div class="alert ar">🔴 CP Khác tuần 1 có 40M tạm ứng du lịch — cần theo dõi quyết toán</div><div class="conclusion"><b>Ket luan:</b> Tuần 1 làm ăn tốt: 589M doanh thu, lãi gộp 239M (40.6%). Tuần 2 còn thiếu dữ liệu — sẽ cập nhật sau!</div></div></div></div><div id="kinh_doanh" class="tab-content" style="display:none"><div class="report"><div class="rtitle">KINH DOANH — HẰNG ĐỖ | THÁNG 7/2026</div><div class="rbody"><div class="split"><div><div style="font-size:22px;font-weight:700" class="">7 → 7</div><div class="small">🛒 Đơn chốt (T1→T2)</div></div><div><div style="font-size:22px;font-weight:700" class="">28 → 29</div><div class="small">💬 Tổng inbox</div></div><div><div style="font-size:22px;font-weight:700" class="g">25% → 27%</div><div class="small">🎯 Tỷ lệ chốt</div></div><div><div style="font-size:22px;font-weight:700" class="g">950K → 1.25M</div><div class="small">💰 Hoa hồng</div></div></div><h3>📊 SO SÁNH TUẦN 15 vs 16</h3><table><tr><th>Chỉ số</th><th>Tuần 15</th><th>Tuần 16</th><th>Thay đổi</th></tr><tr><td class="">🛒 Đơn chốt (máy)</td><td class="num">7</td><td class="num">7</td><td class="num">➖ Ổn định</td></tr><tr><td class="">📦 Đơn máy tồn</td><td class="num">0</td><td class="num">1 (T50 omni)</td><td class="num">🔺 +1</td></tr><tr><td class="">🔄 Đơn bán chéo</td><td class="num">0</td><td class="num">0</td><td class="num">➖</td></tr><tr><td class="">💬 Inbox page</td><td class="num">0</td><td class="num">4</td><td class="num">🔺 +4</td></tr><tr><td class="">📱 Inbox cá nhân</td><td class="num">28</td><td class="num">25</td><td class="num">🔻 -3</td></tr><tr><td class="">📨 Tổng inbox</td><td class="num">28</td><td class="num">29</td><td class="num">🔺 +1</td></tr><tr><td class="">🎯 Tỷ lệ chốt</td><td class="num">25%</td><td class="num">27%</td><td class="num">🔺 +2%</td></tr><tr><td class="">✍️ Bài đăng/Comment</td><td class="num">12</td><td class="num">6</td><td class="num">🔻 -50%</td></tr><tr><td colspan="99"><hr style="margin:0;border:none;border-top:1px dashed #ddd"></td></tr><tr><td class="">💰 Hoa hồng</td><td class="num">950K</td><td class="num">1.25M</td><td class="num">🔺 +300K</td></tr></table><h3>📈 XU HƯỚNG 3 TUẦN GẦN ĐÂY</h3><table><tr><th>Tuần</th><th>Đơn</th><th>Inbox</th><th>Tỷ lệ chốt</th><th>Hoa hồng</th></tr><tr><td class="">14 (20-26/6)</td><td class="num">2 🔴</td><td class="num">24</td><td class="num">8.3%</td><td class="num">300K</td></tr><tr><td class="">15 (27/6-3/7)</td><td class="num">7 🟢</td><td class="num">28</td><td class="num">25%</td><td class="num">950K</td></tr><tr><td class="">16 (4-10/7)</td><td class="num">7 🟢</td><td class="num">29</td><td class="num">27%</td><td class="num">1.25M</td></tr></table><div class="split"><div class="good"><b>Mat tot</b><br>* Đơn ổn định 7 máy/tuần<br>* Tỷ lệ chốt tăng (25%→27%)<br>* Đẩy được 1 máy tồn T50 omni<br>* Hoa hồng tăng 300K<br>* Phục hồi tốt từ tuần 14 (2 đơn)</div><div class="bad"><b>Can cai thien</b><br>* Bài đăng giảm 50% (12→6)<br>* Chưa có đơn bán chéo (2 tuần = 0)<br>* Đơn máy tồn còn thấp<br>* Cần đẩy inbox page lên</div></div><div class="split"><div><b>Tu nhan xet:</b><br>Tot: Hỗ trợ trước/sau bán + đẩy được T50 omni<br>Chua tot: Đẩy đơn tồn & bán chéo</div></div><div class="conclusion"><b>Ket luan:</b> Hằng Đỗ đang giữ phong độ ổn định 7 đơn/tuần, phục hồi tốt sau cú sụt tuần 14. Tỷ lệ chốt cải thiện (25→27%), có đẩy được hàng tồn. Tuy nhiên bài đăng giảm 50% và 2 tuần liền 0 đơn bán chéo — cần nhắc tập trung đẩy bán chéo và duy trì đăng bài đều hơn.</div></div></div><div class="report"><div class="rtitle">KINH DOANH — BÙI QUANG HIẾU | THÁNG 7/2026</div><div class="rbody"><div class="split"><div><div style="font-size:22px;font-weight:700" class="r">14 → 8</div><div class="small">🛒 Đơn chốt (T1→T2)</div></div><div><div style="font-size:22px;font-weight:700" class="r">45 → 24</div><div class="small">💬 Tổng inbox</div></div><div><div style="font-size:22px;font-weight:700" class="g">31% → 33%</div><div class="small">🎯 Tỷ lệ chốt</div></div><div><div style="font-size:22px;font-weight:700" class="r">2.15M → 1.3M</div><div class="small">💰 Hoa hồng</div></div></div><h3>📊 SO SÁNH TUẦN 15 vs 16</h3><table><tr><th>Chỉ số</th><th>Tuần 15</th><th>Tuần 16</th><th>Thay đổi</th></tr><tr><td class="">🛒 Đơn chốt (máy)</td><td class="num">14</td><td class="num">8</td><td class="num">🔻 -43%</td></tr><tr><td class="">📦 Đơn máy tồn</td><td class="num">1</td><td class="num">1</td><td class="num">➖</td></tr><tr><td class="">🔄 Đơn bán chéo</td><td class="num">0</td><td class="num">0</td><td class="num">➖</td></tr><tr><td class="">📱 Inbox cá nhân</td><td class="num">45</td><td class="num">24</td><td class="num">🔻 -47%</td></tr><tr><td class="">🎯 Tỷ lệ chốt</td><td class="num">31.1%</td><td class="num">33.3%</td><td class="num">🔺 +2.2%</td></tr><tr><td class="">✍️ Bài đăng/Comment</td><td class="num">10</td><td class="num">6</td><td class="num">🔻 -40%</td></tr><tr><td class="">👤 KH tiềm năng</td><td class="num">5</td><td class="num">4</td><td class="num">🔻 -1</td></tr><tr><td colspan="99"><hr style="margin:0;border:none;border-top:1px dashed #ddd"></td></tr><tr><td class="">💰 Hoa hồng</td><td class="num">2.15M</td><td class="num">1.3M</td><td class="num">🔻 -850K</td></tr></table><h3>📈 XU HƯỚNG 3 TUẦN GẦN ĐÂY</h3><table><tr><th>Tuần</th><th>Đơn</th><th>Inbox</th><th>Tỷ lệ chốt</th><th>Hoa hồng</th></tr><tr><td class="">14 (20-26/6)</td><td class="num">6</td><td class="num">33</td><td class="num">18.2%</td><td class="num">0.9M</td></tr><tr><td class="">15 (27/6-3/7)</td><td class="num">14 🟢</td><td class="num">45</td><td class="num">31.1%</td><td class="num">2.15M</td></tr><tr><td class="">16 (4-10/7)</td><td class="num">8 🟠</td><td class="num">24</td><td class="num">33.3%</td><td class="num">1.3M</td></tr></table><div class="split"><div class="good"><b>Mat tot</b><br>* Tỷ lệ chốt tăng (31%→33%) — rất tốt<br>* Tuần 15 đỉnh 14 đơn, vượt xa mặt bằng<br>* KH tiềm năng duy trì 4-5</div><div class="bad"><b>Can cai thien</b><br>* Inbox giảm 47% (45→24) — nguy cơ mất lead<br>* Bài đăng giảm 40% (10→6)<br>* 2 tuần 0 đơn bán chéo<br>* Đơn tồn chỉ 1 máy/tuần</div></div><div class="conclusion"><b>Ket luan:</b> Hiếu là top sales với 14 đơn tuần 15 — quá xuất sắc! 🔥 Nhưng tuần 16 tụt còn 8 đơn, inbox giảm một nửa. Tỷ lệ chốt 33% là điểm sáng — chốt giỏi nhưng cần nhiều lead hơn. Cần động viên giữ phong độ, đẩy bài đăng + inbox trở lại, tập trung bán chéo thêm!</div></div></div><div class="report"><div class="rtitle">KHÁCH SỈ — THÚY HIỀN | THÁNG 7/2026</div><div class="rbody"><div class="split"><div><div style="font-size:22px;font-weight:700" class="r">160M → 99M</div><div class="small">💰 Doanh số (T1→T2)</div></div><div><div style="font-size:22px;font-weight:700" class="r">10 → 5</div><div class="small">📦 Số đơn</div></div><div><div style="font-size:22px;font-weight:700" class="g">16M → 20M</div><div class="small">💵 TB/đơn</div></div></div><h3>📊 SO SÁNH</h3><table><tr><th>Model</th><th>Tuần 1</th><th>Tuần 2</th></tr><tr><td class="">X12 cyclone</td><td class="num">64M</td><td class="num">—</td></tr><tr><td class="">T90 pro omni</td><td class="num">15.5M</td><td class="num">30.7M</td></tr><tr><td class="">S9 steam pro</td><td class="num">13M</td><td class="num">25.9M</td></tr><tr><td class="">T30e</td><td class="num">20.2M</td><td class="num">—</td></tr><tr><td class="">T90 tự cấp xả</td><td class="num">—</td><td class="num">30.6M</td></tr><tr><td class="">T50s</td><td class="num">10.8M</td><td class="num">13.7M</td></tr><tr><td colspan="99"><hr style="margin:0;border:none;border-top:1px dashed #ddd"></td></tr><tr><td class="">💰 Tổng</td><td class="num">160M</td><td class="num">99M</td></tr><tr><td class="">📦 Số đơn</td><td class="num">10</td><td class="num">5</td></tr></table><div class="split"><div class="good"><b>Mat tot</b><br>* Giá trị TB/đơn tăng 25% (16M→20M) — bán dòng cao cấp<br>* T90 đang hot (61M tuần 2)<br>* Đa dạng sản phẩm (8-10 model/tuần)</div><div class="bad"><b>Can cai thien</b><br>* Doanh số giảm 38% (160M→99M)<br>* Số đơn giảm 50% (10→5)<br>* Cần đẩy thêm đơn hàng</div></div><div class="conclusion"><b>Ket luan:</b> Thúy Hiền đang chuyển dịch sang dòng cao cấp (T90, S9) — giá trị TB/đơn tăng tốt. Nhưng số lượng đơn giảm mạnh, cần đẩy thêm volume để giữ doanh số.</div></div></div></div><div id="marketing" class="tab-content" style="display:none"><div class="report"><div class="rtitle">MARKETING — THÙY DƯƠNG | THÁNG 7/2026</div><div class="rbody"><div class="split"><div><div style="font-size:22px;font-weight:700" class="r">10 → 3</div><div class="small">📝 Content (T1→T2)</div></div><div><div style="font-size:22px;font-weight:700" class="r">57 → 22</div><div class="small">🌱 Seeding</div></div><div><div style="font-size:22px;font-weight:700" class="r">7 → 5</div><div class="small">👤 Lead</div></div><div><div style="font-size:22px;font-weight:700" class="r">TRỐNG</div><div class="small">📢 ADS</div></div></div><h3>📊 SO SÁNH TUẦN 1 vs 2</h3><table><tr><th>Chỉ số</th><th>Tuần 1</th><th>Tuần 2</th><th>Thay đổi</th></tr><tr><td class="">📢 ADS — Chi phí</td><td class="num">❌ Trống</td><td class="num">❌ Trống</td><td class="num">—</td></tr><tr><td class="">📢 ADS — Tương tác</td><td class="num">❌ Trống</td><td class="num">❌ Trống</td><td class="num">—</td></tr><tr><td class="">📢 ADS — Đơn hàng</td><td class="num">❌ Trống</td><td class="num">❌ Trống</td><td class="num">—</td></tr><tr><td colspan="99"><hr style="margin:0;border:none;border-top:1px dashed #ddd"></td></tr><tr><td class="">📝 Số bài đăng</td><td class="num">10</td><td class="num">3</td><td class="num">🔻 -70%</td></tr><tr><td class="">🎬 Video mới</td><td class="num">0</td><td class="num">0</td><td class="num">➖</td></tr><tr><td colspan="99"><hr style="margin:0;border:none;border-top:1px dashed #ddd"></td></tr><tr><td class="">🌱 Seeding — Robot</td><td class="num">8</td><td class="num">2</td><td class="num">🔻 -75%</td></tr><tr><td class="">🌱 Seeding — Cầm tay</td><td class="num">25</td><td class="num">10</td><td class="num">🔻 -60%</td></tr><tr><td class="">🌱 Seeding — Khí sạch</td><td class="num">24</td><td class="num">10</td><td class="num">🔻 -58%</td></tr><tr><td class="">🌱 Tổng seeding</td><td class="num">57</td><td class="num">22</td><td class="num">🔻 -61%</td></tr><tr><td class="">👤 Lead</td><td class="num">7</td><td class="num">5</td><td class="num">🔻 -29%</td></tr></table><div class="split"><div class="good"><b>Mat tot</b><br>* Seeding vẫn có hoạt động dù giảm<br>* Có kế hoạch tuần tới (đẩy T50, T50S)</div><div class="bad"><b>Can cai thien</b><br>* ADS trống 2 tuần liền<br>* Báo cáo tuần 2 copy số liệu tuần 1<br>* Fanpage bị đình chỉ<br>* Content giảm 70%, seeding giảm 61%</div></div><div class="alert ar">🔴 ADS trống hoàn toàn 2 tuần liền — không có bất kỳ số liệu nào!</div><div class="alert ar">🔴 Báo cáo tuần 2 bị copy từ tuần 1 — chưa cập nhật thực tế</div><div class="alert ao">🟠 Fanpage bị đình chỉ — cần xử lý gấp!</div><div class="conclusion"><b>Ket luan:</b> Thùy Dương đang có vấn đề nghiêm trọng: ADS trống 2 tuần, báo cáo copy, fanpage bị đình chỉ. Seeding và content đều giảm mạnh. Cần ngồi lại review gấp!</div></div></div><div class="report"><div class="rtitle">VIDEO CONTENT — THU CHINH | THÁNG 7/2026</div><div class="rbody"><div class="split"><div><div style="font-size:22px;font-weight:700" class="r">12 → 8</div><div class="small">🎬 Tổng video (T1→T2)</div></div><div><div style="font-size:22px;font-weight:700" class="">7 → 7</div><div class="small">📱 TikTok</div></div><div><div style="font-size:22px;font-weight:700" class="r">5 → 1</div><div class="small">📘 Facebook</div></div><div><div style="font-size:22px;font-weight:700" class="r">43%</div><div class="small">🎯 Hook rate</div></div></div><h3>📊 SO SÁNH TUẦN 1 vs 2</h3><table><tr><th>Chỉ số</th><th>Tuần 1</th><th>Tuần 2</th><th>Thay đổi</th></tr><tr><td class="">🎬 Tổng video</td><td class="num">12</td><td class="num">8</td><td class="num">🔻 -33%</td></tr><tr><td class="">📱 TikTok</td><td class="num">7</td><td class="num">7</td><td class="num">➖</td></tr><tr><td class="">📘 Facebook</td><td class="num">5</td><td class="num">1</td><td class="num">🔻 -80%</td></tr><tr><td colspan="99"><hr style="margin:0;border:none;border-top:1px dashed #ddd"></td></tr><tr><td class="">🛒 Bán hàng</td><td class="num">11</td><td class="num">6</td><td class="num">🔻 -45%</td></tr><tr><td class="">🎨 Branding</td><td class="num">1</td><td class="num">2</td><td class="num">🔺 +100%</td></tr><tr><td class="">🔍 Review/SEO</td><td class="num">0</td><td class="num">0</td><td class="num">➖</td></tr><tr><td colspan="99"><hr style="margin:0;border:none;border-top:1px dashed #ddd"></td></tr><tr><td class="">✅ KPI số lượng</td><td class="num">✅ Đạt (12)</td><td class="num">✅ Đạt (8)</td><td class="num"></td></tr><tr><td class="">❌ Hook rate >40%</td><td class="num">43% ❌</td><td class="num">43% ❌</td><td class="num">Mục tiêu ≥50%</td></tr></table><h3>🏆 TOP VIDEO TUẦN 2</h3><table><tr><th>#</th><th>Nội dung</th><th>Views</th></tr><tr><td class="">🥇</td><td class="num">Test i7 Steam lau thực tế</td><td class="num">540</td></tr><tr><td class="">🥈</td><td class="num">Mua robot cho bố mẹ (storytelling)</td><td class="num">495</td></tr><tr><td class="">🥉</td><td class="num">Vệ sinh chổi robot (sửa chữa)</td><td class="num">427</td></tr></table><div class="split"><div class="good"><b>Mat tot</b><br>* Đạt KPI số lượng cả 2 tuần (12 & 8 video)<br>* Nội dung đa dạng: storytelling, before/after, sửa chữa<br>* Có video đạt 500+ views, hook kích thích thị giác</div><div class="bad"><b>Can cai thien</b><br>* Facebook giảm 80% (5→1) — đang bỏ rơi nền tảng<br>* Hook rate 43% — dưới mục tiêu 50% (2 tuần liền)<br>* Không có video Review/SEO<br>* Không báo cáo vấn đề gì</div></div><div class="alert ao">🟡 Facebook giảm 80% — cần đẩy lại nền tảng này</div><div class="alert ao">🟡 Hook rate 43% — dưới mục tiêu 50%</div><div class="conclusion"><b>Ket luan:</b> Thu Chinh duy trì KPI số lượng tốt, nội dung đa dạng. Nhưng Facebook bị bỏ rơi (giảm 80%), hook rate chưa đạt mục tiêu, và thiếu video review/SEO. Cần phân bổ lại nền tảng và cải thiện chất lượng hook.</div></div></div></div>
+<div class="tabs"><button class="tab active" onclick="openTab(event,'tai_chinh')">💰 Tai chinh</button><button class="tab" onclick="openTab(event,'kinh_doanh')">🛒 Kinh doanh</button><button class="tab" onclick="openTab(event,'marketing')">📢 Marketing</button><button class="tab" onclick="openTab(event,'inbox')">📬 Inbox</button></div>
+<div id="tai_chinh" class="tab-content" style="display:block">
+<div class="report"><div class="rtitle">TỔNG KẾT THU CHI — THÁNG 7/2026 (2 TUẦN ĐẦU)</div><div class="rbody">
+<div class="split">
+<div><div style="font-size:22px;font-weight:700">589M / 156M</div><div class="small">💰 Doanh thu (T1 / T2)</div></div>
+<div><div style="font-size:22px;font-weight:700">350M / 108M</div><div class="small">💸 Chi phí (T1 / T2)</div></div>
+<div><div style="font-size:22px;font-weight:700">239M / 48M</div><div class="small">📈 Lãi gộp (T1 / T2)</div></div>
+<div><div style="font-size:22px;font-weight:700">40.6% / 30.8%</div><div class="small">📊 Biên lợi nhuận</div></div>
+</div>
+<h3>📊 DOANH THU</h3>
+<table>
+<tr><th></th><th>Tuần 1 (1-7/7)</th><th>Tuần 2 (8-14/7)</th><th>Tổng</th></tr>
+<tr><td class="">Doanh thu</td><td class="num">589M</td><td class="num">156M</td><td class="num">745M</td></tr>
+<tr><td class="">Số giao dịch</td><td class="num">~48 đơn</td><td class="num">~15 đơn</td><td class="num">~63 đơn</td></tr>
+</table>
+<h3>💸 CHI PHÍ</h3>
+<table>
+<tr><th></th><th>Tuần 1</th><th>Tuần 2</th></tr>
+<tr><td class="">Tổng chi phí thực</td><td class="num">350M</td><td class="num">108M</td></tr>
+<tr><td class="">Nộp quỹ (không phải CP)</td><td class="num">3M</td><td class="num">63M</td></tr>
+</table>
+<h3>📊 Cơ cấu chi phí Tuần 1</h3>
+<table>
+<tr><th>Danh mục</th><th>Số tiền</th><th>Tỷ trọng</th></tr>
+<tr><td class="">🏭 CP Nhập hàng (COGS)</td><td class="num">300M</td><td class="num">85.7%</td></tr>
+<tr><td class="">❓ CP Khác</td><td class="num">45M</td><td class="num">13.0%</td></tr>
+<tr><td class="">⚙️ CP Vận hành</td><td class="num">3.5M</td><td class="num">1.0%</td></tr>
+<tr><td class="">🛠️ CP Công cụ & Dụng cụ</td><td class="num">988K</td><td class="num">0.3%</td></tr>
+<tr><td class="">🚚 CP Vận chuyển</td><td class="num">50K</td><td class="num">0.0%</td></tr>
+</table>
+<h3>📊 Cơ cấu chi phí Tuần 2</h3>
+<table>
+<tr><th>Danh mục</th><th>Số tiền</th><th>Tỷ trọng</th></tr>
+<tr><td class="">👥 CP Lương & Phúc lợi</td><td class="num">107M</td><td class="num">99.0%</td></tr>
+<tr><td class="">🚚 CP Vận chuyển</td><td class="num">1M</td><td class="num">0.9%</td></tr>
+<tr><td class="">❓ CP Khác</td><td class="num">59K</td><td class="num">0.1%</td></tr>
+</table>
+<h3>📈 LỢI NHUẬN GỘP</h3>
+<table>
+<tr><th></th><th>Tuần 1</th><th>Tuần 2</th></tr>
+<tr><td class="">Doanh thu</td><td class="num">589M</td><td class="num">156M</td></tr>
+<tr><td class="">Chi phí thực</td><td class="num">(350M)</td><td class="num">(108M)</td></tr>
+<tr><td class=""><b>Lợi nhuận gộp</b></td><td class="num"><b>239M (40.6%)</b></td><td class="num"><b>48M (30.8%)</b></td></tr>
+</table>
+<div class="conclusion">Tuần 1 làm ăn tốt: 589M doanh thu, lãi gộp 239M (40.6%). Tuần 2 còn thiếu dữ liệu — sẽ cập nhật sau!</div>
+</div></div>
+</div>
+<div id="kinh_doanh" class="tab-content" >
+<div class="report"><div class="rtitle">KINH DOANH — HẰNG ĐỖ | THÁNG 7/2026</div><div class="rbody">
+<div class="split">
+<div><div style="font-size:22px;font-weight:700">7 → 7</div><div class="small">🛒 Đơn chốt (T1→T2)</div></div>
+<div><div style="font-size:22px;font-weight:700">28 → 29</div><div class="small">💬 Tổng inbox</div></div>
+<div><div style="font-size:22px;font-weight:700">25% → 27%</div><div class="small">🎯 Tỷ lệ chốt</div></div>
+<div><div style="font-size:22px;font-weight:700">950K → 1.25M</div><div class="small">💰 Hoa hồng</div></div>
+</div>
+<h3>📊 SO SÁNH TUẦN 15 vs 16</h3>
+<table>
+<tr><th>Chỉ số</th><th>Tuần 15</th><th>Tuần 16</th><th>Thay đổi</th></tr>
+<tr><td class="">🛒 Đơn chốt (máy)</td><td class="num">7</td><td class="num">7</td><td class="num">➖ Ổn định</td></tr>
+<tr><td class="">📦 Đơn máy tồn</td><td class="num">0</td><td class="num">1 (T50 omni)</td><td class="num">🔺 +1</td></tr>
+<tr><td class="">🔄 Đơn bán chéo</td><td class="num">0</td><td class="num">0</td><td class="num">➖</td></tr>
+<tr><td class="">💬 Inbox page</td><td class="num">0</td><td class="num">4</td><td class="num">🔺 +4</td></tr>
+<tr><td class="">📱 Inbox cá nhân</td><td class="num">28</td><td class="num">25</td><td class="num">🔻 -3</td></tr>
+<tr><td class="">📨 Tổng inbox</td><td class="num">28</td><td class="num">29</td><td class="num">🔺 +1</td></tr>
+<tr><td class="">🎯 Tỷ lệ chốt</td><td class="num">25%</td><td class="num">27%</td><td class="num">🔺 +2%</td></tr>
+<tr><td class="">✍️ Bài đăng/Comment</td><td class="num">12</td><td class="num">6</td><td class="num">🔻 -50%</td></tr>
+<tr><td class="">None</td></tr>
+<tr><td class="">💰 Hoa hồng</td><td class="num">950K</td><td class="num">1.25M</td><td class="num">🔺 +300K</td></tr>
+</table>
+<h3>📈 XU HƯỚNG 3 TUẦN GẦN ĐÂY</h3>
+<table>
+<tr><th>Tuần</th><th>Đơn</th><th>Inbox</th><th>Tỷ lệ chốt</th><th>Hoa hồng</th></tr>
+<tr><td class="">14 (20-26/6)</td><td class="num">2 🔴</td><td class="num">24</td><td class="num">8.3%</td><td class="num">300K</td></tr>
+<tr><td class="">15 (27/6-3/7)</td><td class="num">7 🟢</td><td class="num">28</td><td class="num">25%</td><td class="num">950K</td></tr>
+<tr><td class="">16 (4-10/7)</td><td class="num">7 🟢</td><td class="num">29</td><td class="num">27%</td><td class="num">1.25M</td></tr>
+</table>
+<div class="conclusion">Hằng Đỗ đang giữ phong độ ổn định 7 đơn/tuần, phục hồi tốt sau cú sụt tuần 14. Tỷ lệ chốt cải thiện (25→27%), có đẩy được hàng tồn. Tuy nhiên bài đăng giảm 50% và 2 tuần liền 0 đơn bán chéo — cần nhắc tập trung đẩy bán chéo và duy trì đăng bài đều hơn.</div>
+</div></div>
+<div class="report"><div class="rtitle">KINH DOANH — BÙI QUANG HIẾU | THÁNG 7/2026</div><div class="rbody">
+<div class="split">
+<div><div style="font-size:22px;font-weight:700">14 → 8</div><div class="small">🛒 Đơn chốt (T1→T2)</div></div>
+<div><div style="font-size:22px;font-weight:700">45 → 24</div><div class="small">💬 Tổng inbox</div></div>
+<div><div style="font-size:22px;font-weight:700">31% → 33%</div><div class="small">🎯 Tỷ lệ chốt</div></div>
+<div><div style="font-size:22px;font-weight:700">2.15M → 1.3M</div><div class="small">💰 Hoa hồng</div></div>
+</div>
+<h3>📊 SO SÁNH TUẦN 15 vs 16</h3>
+<table>
+<tr><th>Chỉ số</th><th>Tuần 15</th><th>Tuần 16</th><th>Thay đổi</th></tr>
+<tr><td class="">🛒 Đơn chốt (máy)</td><td class="num">14</td><td class="num">8</td><td class="num">🔻 -43%</td></tr>
+<tr><td class="">📦 Đơn máy tồn</td><td class="num">1</td><td class="num">1</td><td class="num">➖</td></tr>
+<tr><td class="">🔄 Đơn bán chéo</td><td class="num">0</td><td class="num">0</td><td class="num">➖</td></tr>
+<tr><td class="">📱 Inbox cá nhân</td><td class="num">45</td><td class="num">24</td><td class="num">🔻 -47%</td></tr>
+<tr><td class="">🎯 Tỷ lệ chốt</td><td class="num">31.1%</td><td class="num">33.3%</td><td class="num">🔺 +2.2%</td></tr>
+<tr><td class="">✍️ Bài đăng/Comment</td><td class="num">10</td><td class="num">6</td><td class="num">🔻 -40%</td></tr>
+<tr><td class="">👤 KH tiềm năng</td><td class="num">5</td><td class="num">4</td><td class="num">🔻 -1</td></tr>
+<tr><td class="">None</td></tr>
+<tr><td class="">💰 Hoa hồng</td><td class="num">2.15M</td><td class="num">1.3M</td><td class="num">🔻 -850K</td></tr>
+</table>
+<h3>📈 XU HƯỚNG 3 TUẦN GẦN ĐÂY</h3>
+<table>
+<tr><th>Tuần</th><th>Đơn</th><th>Inbox</th><th>Tỷ lệ chốt</th><th>Hoa hồng</th></tr>
+<tr><td class="">14 (20-26/6)</td><td class="num">6</td><td class="num">33</td><td class="num">18.2%</td><td class="num">0.9M</td></tr>
+<tr><td class="">15 (27/6-3/7)</td><td class="num">14 🟢</td><td class="num">45</td><td class="num">31.1%</td><td class="num">2.15M</td></tr>
+<tr><td class="">16 (4-10/7)</td><td class="num">8 🟠</td><td class="num">24</td><td class="num">33.3%</td><td class="num">1.3M</td></tr>
+</table>
+<div class="conclusion">Hiếu là top sales với 14 đơn tuần 15 — quá xuất sắc! 🔥 Nhưng tuần 16 tụt còn 8 đơn, inbox giảm một nửa. Tỷ lệ chốt 33% là điểm sáng — chốt giỏi nhưng cần nhiều lead hơn. Cần động viên giữ phong độ, đẩy bài đăng + inbox trở lại, tập trung bán chéo thêm!</div>
+</div></div>
+<div class="report"><div class="rtitle">KHÁCH SỈ — THÚY HIỀN | THÁNG 7/2026</div><div class="rbody">
+<div class="split">
+<div><div style="font-size:22px;font-weight:700">160M → 99M</div><div class="small">💰 Doanh số (T1→T2)</div></div>
+<div><div style="font-size:22px;font-weight:700">10 → 5</div><div class="small">📦 Số đơn</div></div>
+<div><div style="font-size:22px;font-weight:700">16M → 20M</div><div class="small">💵 TB/đơn</div></div>
+</div>
+<h3>📊 SO SÁNH</h3>
+<table>
+<tr><th>Model</th><th>Tuần 1</th><th>Tuần 2</th></tr>
+<tr><td class="">X12 cyclone</td><td class="num">64M</td><td class="num">—</td></tr>
+<tr><td class="">T90 pro omni</td><td class="num">15.5M</td><td class="num">30.7M</td></tr>
+<tr><td class="">S9 steam pro</td><td class="num">13M</td><td class="num">25.9M</td></tr>
+<tr><td class="">T30e</td><td class="num">20.2M</td><td class="num">—</td></tr>
+<tr><td class="">T90 tự cấp xả</td><td class="num">—</td><td class="num">30.6M</td></tr>
+<tr><td class="">T50s</td><td class="num">10.8M</td><td class="num">13.7M</td></tr>
+<tr><td class="">None</td></tr>
+<tr><td class="">💰 Tổng</td><td class="num">160M</td><td class="num">99M</td></tr>
+<tr><td class="">📦 Số đơn</td><td class="num">10</td><td class="num">5</td></tr>
+</table>
+<div class="conclusion">Thúy Hiền đang chuyển dịch sang dòng cao cấp (T90, S9) — giá trị TB/đơn tăng tốt. Nhưng số lượng đơn giảm mạnh, cần đẩy thêm volume để giữ doanh số.</div>
+</div></div>
+</div>
+<div id="marketing" class="tab-content" >
+<div style="text-align:center;padding:40px;color:#999">Chua co du lieu</div>
+</div>
+<div id="inbox" class="tab-content" >
+<div class="report"><div class="rtitle">FB CLONE INBOX — Tin Nhắn & Thông Báo</div><div class="rbody">
+<div class="split">
+<div><div style="font-size:22px;font-weight:700">1</div><div class="small">💬 Tổng tin nhắn</div></div>
+<div><div style="font-size:22px;font-weight:700">1</div><div class="small">💬 Messenger</div></div>
+<div><div style="font-size:22px;font-weight:700">0</div><div class="small">🔔 Thông báo</div></div>
+<div><div style="font-size:22px;font-weight:700">13/07/2026 10:20</div><div class="small">🕐 Cập nhật</div></div>
+</div>
+<h3>📬 Tin nhắn & thông báo gần đây</h3>
+<table>
+<tr><th>Nick</th><th>Loại</th><th>Nội dung</th><th>Thời gian</th></tr>
+<tr><td class="">FB_Duong_da_Thao</td><td class="num">💬 inbox</td><td class="num">MdRocky Bai
+You're now friends with MdRocky.
+  ·
+1y</td><td class="num">2026-07-13 17:20</td></tr>
+</table>
+<div class="conclusion">Cập nhật mỗi 30 phút từ máy Đại Ca. 1 tin nhắn đã ghi nhận.</div>
+</div></div>
+</div>
+
 </div>
 <script>
 function openTab(evt, id) {
     var tabs = document.getElementsByClassName('tab');
-    for (var i=0;i<tabs.length;i++) tabs[i].className = tabs[i].className.replace(' active','');
-    evt.currentTarget.className += ' active';
+    for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
+    evt.currentTarget.classList.add('active');
     var contents = document.getElementsByClassName('tab-content');
-    for (var i=0;i<contents.length;i++) contents[i].style.display = 'none';
+    for (var i = 0; i < contents.length; i++) contents[i].style.display = 'none';
     document.getElementById(id).style.display = 'block';
 }
 </script>
