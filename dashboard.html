@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FB Inbox Dashboard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,sans-serif;background:#f0f2f5;color:#1a1a2e}
+.header{background:linear-gradient(135deg,#1a1a2e,#2E86AB);color:#fff;padding:16px 24px;text-align:center}
+.header h1{font-size:20px}.header span{font-size:12px;opacity:.7}
+.container{max-width:1000px;margin:16px auto;padding:0 16px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+.stat-card{background:#fff;border-radius:10px;padding:14px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.stat-card .val{font-size:28px;font-weight:700}
+.stat-card .lbl{font-size:11px;color:#888;margin-top:4px}
+.msg-card{background:#fff;border-radius:10px;padding:14px 18px;margin:10px 0;box-shadow:0 1px 3px rgba(0,0,0,.06);display:flex;gap:12px;align-items:flex-start}
+.msg-card .icon{font-size:24px}
+.msg-card .body{flex:1}
+.msg-card .nick{font-weight:700;color:#2E86AB;font-size:13px}
+.msg-card .text{font-size:14px;margin:4px 0;line-height:1.4}
+.msg-card .time{font-size:11px;color:#999}
+.msg-card .type{font-size:11px;padding:2px 8px;border-radius:10px;display:inline-block}
+.type-inbox{background:#e3f2fd;color:#1565C0}
+.type-notification{background:#fff3e0;color:#E65100}
+.empty{text-align:center;padding:60px;color:#999;font-size:14px}
+.refresh{position:fixed;bottom:20px;right:20px;background:#2E86AB;color:#fff;border:none;border-radius:50px;padding:12px 24px;font-size:14px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>📬 FB Clone Inbox Dashboard</h1>
+<span id="updateTime">Đang tải...</span>
+</div>
+<div class="container" id="app"><div class="empty">⏳ Đang tải dữ liệu...</div></div>
+<button class="refresh" onclick="location.reload()">🔄 Làm mới</button>
+
+<script>
+async function load(){
+    try{
+        const r = await fetch('inbox_log.json');
+        const data = await r.json();
+        const msgs = Object.values(data).sort((a,b) => (b.time||'').localeCompare(a.time||''));
+        
+        document.getElementById('updateTime').textContent = msgs.length + ' tin nhắn | ' + new Date().toLocaleString('vi-VN');
+        
+        // Stats
+        const inbox = msgs.filter(m => m.type==='inbox');
+        const notif = msgs.filter(m => m.type==='notification');
+        const today = msgs.filter(m => (m.time||'').startsWith(new Date().toISOString().slice(0,10)));
+        
+        let h = '<div class="stats">';
+        h += `<div class="stat-card"><div class="val">${msgs.length}</div><div class="lbl">Tổng tin nhắn</div></div>`;
+        h += `<div class="stat-card"><div class="val">${today.length}</div><div class="lbl">Hôm nay</div></div>`;
+        h += `<div class="stat-card"><div class="val">${inbox.length}</div><div class="lbl">💬 Messenger</div></div>`;
+        h += `<div class="stat-card"><div class="val">${notif.length}</div><div class="lbl">🔔 Thông báo</div></div>`;
+        h += '</div>';
+        
+        if(msgs.length === 0){
+            h += '<div class="empty">📭 Chưa có tin nhắn nào</div>';
+        } else {
+            for(const m of msgs.slice(0, 50)){
+                const icon = m.type === 'inbox' ? '💬' : '🔔';
+                const typeClass = m.type === 'inbox' ? 'type-inbox' : 'type-notification';
+                const content = m.from || m.content || '';
+                const time = (m.time||'').replace('T',' ').slice(0,16);
+                
+                h += `<div class="msg-card">
+                    <div class="icon">${icon}</div>
+                    <div class="body">
+                        <div><span class="nick">${m.nick||'?'}</span> <span class="type ${typeClass}">${m.type==='inbox'?'Messenger':'Thông báo'}</span></div>
+                        <div class="text">${content}</div>
+                        <div class="time">${time}</div>
+                    </div>
+                </div>`;
+            }
+        }
+        
+        document.getElementById('app').innerHTML = h;
+    }catch(e){
+        document.getElementById('app').innerHTML = '<div class="empty">❌ Chưa có dữ liệu — chạy CHECK_INBOX.bat trước!</div>';
+    }
+}
+load();
+setInterval(load, 30000); // Auto refresh every 30s
+</script>
+</body>
+</html>
