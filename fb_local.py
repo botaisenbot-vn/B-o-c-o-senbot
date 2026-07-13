@@ -159,20 +159,26 @@ def process_nick(name, info):
     
     ws = result.get("data", {}).get("ws", {})
     debug_port = result.get("data", {}).get("debug_port", "")
+    webdriver_path = result.get("data", {}).get("webdriver", "")
     if not debug_port:
-        # Fallback: parse from puppeteer URL
         puppeteer = ws.get("puppeteer", "")
         if puppeteer:
             import re
             m = re.search(r'127\.0\.0\.1:(\d+)', puppeteer)
             if m:
                 debug_port = m.group(1)
-    log(f"Browser: port={debug_port}")
+    log(f"Browser: port={debug_port} webdriver={webdriver_path}")
     
     try:
         options = Options()
         options.add_experimental_option("debuggerAddress", f"127.0.0.1:{debug_port}")
-        driver = webdriver.Chrome(options=options)
+        # Use AdPower's ChromeDriver if available (matches Chrome version)
+        if webdriver_path and os.path.exists(webdriver_path):
+            from selenium.webdriver.chrome.service import Service
+            service = Service(executable_path=webdriver_path)
+            driver = webdriver.Chrome(service=service, options=options)
+        else:
+            driver = webdriver.Chrome(options=options)
         
         # GO TO FACEBOOK
         driver.get("https://facebook.com")
