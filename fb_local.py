@@ -170,15 +170,20 @@ def process_nick(name, info):
     log(f"Browser: port={debug_port} webdriver={webdriver_path}")
     
     try:
+        from selenium.webdriver.chrome.service import Service
+
         options = Options()
         options.add_experimental_option("debuggerAddress", f"127.0.0.1:{debug_port}")
-        # Use AdPower's ChromeDriver if available (matches Chrome version)
-        if webdriver_path and os.path.exists(webdriver_path):
-            from selenium.webdriver.chrome.service import Service
+        
+        # LUÔN dùng ChromeDriver của AdPower
+        if webdriver_path:
+            log(f"Using webdriver: {webdriver_path}")
             service = Service(executable_path=webdriver_path)
-            driver = webdriver.Chrome(service=service, options=options)
         else:
-            driver = webdriver.Chrome(options=options)
+            log("⚠️ No webdriver path, using system default")
+            service = Service()
+        
+        driver = webdriver.Chrome(service=service, options=options)
         
         # GO TO FACEBOOK
         driver.get("https://facebook.com")
