@@ -43,7 +43,7 @@ def load_inbox_log():
     return {}
 
 def save_inbox_log(data):
-    INBOX_LOG.write_text(json.dumps(data, indent=2, ensure_ascii=False, default=str))
+    INBOX_LOG.write_text(json.dumps(data, indent=2, ensure_ascii=False, default=str), encoding='utf-8')
 
 def check_one_nick(name, info):
     """Check inbox + notifications for 1 nick"""
