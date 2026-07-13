@@ -108,11 +108,23 @@ def check_one_nick(name, user_id):
 def main():
     log("🔍 Checking inbox...")
     
-    state = json.loads(STATE_FILE.read_text()) if STATE_FILE.exists() else {}
-    profiles = state.get("profiles", {})
-    
+    state_file = SCRIPT_DIR / "nick_state.json"
+    log(f"Looking for state at: {state_file}")
+    log(f"File exists: {state_file.exists()}")
+    if state_file.exists():
+        try:
+            state = json.loads(state_file.read_text())
+            profiles = state.get("profiles", {})
+            log(f"Profiles found: {len(profiles)}")
+        except Exception as e:
+            log(f"State parse error: {e}")
+            profiles = {}
+    else:
+        log("❌ nick_state.json NOT FOUND!")
+        profiles = {}
+
     if not profiles:
-        log("No profiles!")
+        log("Chay setup truoc: 2_SETUP_PROFILES.bat")
         return
     
     inbox_log = load_inbox_log()
