@@ -45,8 +45,9 @@ def load_inbox_log():
 def save_inbox_log(data):
     INBOX_LOG.write_text(json.dumps(data, indent=2, ensure_ascii=False, default=str))
 
-def check_one_nick(name, user_id):
+def check_one_nick(name, info):
     """Check inbox + notifications for 1 nick"""
+    user_id = info["id"]
     result = open_browser(user_id)
     if not result or result.get("code") != 0:
         log(f"❌ {name}: Open failed")
@@ -70,27 +71,63 @@ def check_one_nick(name, user_id):
         service = Service(executable_path=webdriver_path) if webdriver_path and os.path.exists(webdriver_path) else Service()
         driver = webdriver.Chrome(service=service, options=options)
         
-        # 1. Check Messenger
-        driver.get("https://mbasic.facebook.com/messages/")
+        # 0. IMPORT COOKIE FIRST (if not done yet)
+        if not info.get("cookie_imported") and info.get("cookie_file"):
+            cf = info["cookie_file"]
+            if os.path.exists(cf):
+                try:
+                    driver.get("https://facebook.com")
+                    time.sleep(3)
+                    with open(cf, 'r', encoding='utf-8') as f:
+                        cookies_data = json.load(f)
+                    for c in cookies_data:
+                        try:
+                            driver.add_cookie({
+                                'name': c.get('name', ''),
+                                'value': c.get('value', ''),
+                                'domain': c.get('domain', '.facebook.com'),
+                                'path': c.get('path', '/'),
+                            })
+                        except: pass
+                    driver.refresh()
+                    time.sleep(3)
+                    info["cookie_imported"] = True
+                    log(f"  Imported {len(cookies_data)} cookies")
+                except Exception as e:
+                    log(f"  Cookie err: {e}")
+        
+        # 1. Check Messenger (desktop version)
+        driver.get("https://facebook.com")
         time.sleep(3)
         
+        # Check messenger icon for unread badge
         try:
-            # Check if there are unread messages
-            threads = driver.find_elements(By.CSS_SELECTOR, '[role="row"], a[href*="/messages/read/"]')
-            for t in threads[:5]:
+            badges = driver.find_elements(By.CSS_SELECTOR, '[aria-label*="Messenger"] [role="link"] span, [data-pagelet="Messenger"] span')
+            for badge in badges:
+                text = badge.text.strip()
+                if text.isdigit() and int(text) > 0:
+                    new_messages.append({"type": "inbox", "from": f"Co {text} tin nhan chua doc", "nick": name})
+        except: pass
+        
+        # Go to messenger page
+        driver.get("https://www.facebook.com/messages/t/")
+        time.sleep(3)
+        try:
+            threads = driver.find_elements(By.CSS_SELECTOR, '[role="row"], [role="listitem"], div[data-tabindex]')
+            for t in threads[:10]:
                 text = t.text.strip()
-                if text and "Bạn:" not in text and text not in ["Messenger", "Xem tất cả"]:
-                    new_messages.append({"type": "inbox", "from": text[:100], "nick": name})
+                if text and len(text) > 10 and "Bạn:" not in text and "Chat" not in text:
+                    new_messages.append({"type": "inbox", "from": text[:120], "nick": name})
         except: pass
         
         # 2. Check notifications
-        driver.get("https://mbasic.facebook.com/notifications.php")
+        driver.get("https://facebook.com/notifications")
         time.sleep(2)
         try:
             items = driver.find_elements(By.CSS_SELECTOR, '[role="article"], div[class*="notification"]')
             for item in items[:5]:
                 text = item.text.strip()
-                if text and "đã" in text.lower() and len(text) > 10:
+                if text and len(text) > 10:
                     new_messages.append({"type": "notification", "content": text[:200], "nick": name})
         except: pass
         
@@ -138,7 +175,7 @@ def main():
         uid = info["id"]
         log(f"  👤 {name}...")
         
-        msgs = check_one_nick(name, uid)
+        msgs = check_one_nick(name, info)
         if msgs:
             for m in msgs:
                 key = f"{name}_{m.get('type')}_{m.get('from','')[:50]}_{datetime.now().strftime('%Y%m%d%H')}"
