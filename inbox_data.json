@@ -5,7 +5,7 @@
     "from": "MdRocky Bai\nYou're now friends with MdRocky.\n  ·\n1y",
     "nick": "FB_Duong_da_Thao"
   },
-  "_updated": "14/07/2026 08:40",
+  "_updated": "14/07/2026 09:11",
   "FB_Bui_Xuyen_inbox_Đại Đạo\nTin nhắn chưa đọc:\nTin nhắn và cuộc gọi đư_2026071410": {
     "time": "2026-07-14T10:04:24.801255",
     "type": "inbox",
@@ -335,6 +335,13 @@
     "type": "inbox",
     "from": "Use another profile",
     "nick": "FB_Duong_da_Thao",
+    "message_time": null
+  },
+  "FB_Bui_Duong_inbox_Tạo tài khoản mới_2026071416": {
+    "time": "2026-07-14T16:10:47.200354",
+    "type": "inbox",
+    "from": "Tạo tài khoản mới",
+    "nick": "FB_Bui_Duong",
     "message_time": null
   }
 }
