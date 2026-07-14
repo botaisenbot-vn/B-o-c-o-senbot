@@ -5,7 +5,7 @@
     "from": "MdRocky Bai\nYou're now friends with MdRocky.\n  ·\n1y",
     "nick": "FB_Duong_da_Thao"
   },
-  "_updated": "14/07/2026 06:55",
+  "_updated": "14/07/2026 07:10",
   "FB_Bui_Xuyen_inbox_Đại Đạo\nTin nhắn chưa đọc:\nTin nhắn và cuộc gọi đư_2026071410": {
     "time": "2026-07-14T10:04:24.801255",
     "type": "inbox",
@@ -302,11 +302,11 @@
     "from": "Đại Đạo\nTin nhắn chưa đọc:\nTin nhắn và cuộc gọi được bảo mật bằng tính năng mã hóa đầu cuối.\n  ·\n49 tuần",
     "nick": "FB_Phan_Thien_Kim"
   },
-  "test_key": {
-    "time": "2026-07-14T14:00:00",
-    "message_time": "2026-07-14T07:30:00",
+  "FB_Bui_Duong_inbox_Tạo tài khoản mới_2026071414": {
+    "time": "2026-07-14T14:10:07.653068",
     "type": "inbox",
-    "from": "Test message - older",
-    "nick": "TEST"
+    "from": "Tạo tài khoản mới",
+    "nick": "FB_Bui_Duong",
+    "message_time": null
   }
 }
