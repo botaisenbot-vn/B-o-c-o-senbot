@@ -1,107 +1,106 @@
 #!/usr/bin/env python3
 """
-TikTok Scraper — Lấy chỉ số: followers, video views, comments
-Chạy trên máy Đại Ca (cần Chrome + Selenium)
+TikTok Scraper Local — Chạy trên máy Đại Ca (AdPower Chrome)
+Scrape: followers, videos, views, comments → gửi lên VPS Dashboard
 """
-import json, time, os, sys, requests, re
+import json, time, re, os, requests
 from datetime import datetime
 from pathlib import Path
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 TIKTOK_USER = "nhasachcungsenbot"
-TIKTOK_URL = f"https://www.tiktok.com/@{TIKTOK_USER}"
-DATA_FILE = Path("tiktok_data.json")
+VPS_URL = "http://72.60.232.73:8765/tiktok"
+DATA_FILE = Path(__file__).parent / "tiktok_data.json"
 
-def scrape_tiktok():
-    print(f"🎵 Scraping TikTok: {TIKTOK_USER}...")
+def log(msg):
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}")
+
+def scrape():
+    log(f"🎵 Scraping @{TIKTOK_USER}...")
     
     options = Options()
-    options.add_argument("--headless=new")
-    options.add_argument("--no-sandbox")
     options.add_argument("--disable-blink-features=AutomationControlled")
-    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
+    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option('useAutomationExtension', False)
+    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36")
     
     driver = webdriver.Chrome(options=options)
+    driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
     
     try:
-        driver.get(TIKTOK_URL)
-        time.sleep(5)
+        driver.get(f"https://www.tiktok.com/@{TIKTOK_USER}")
+        time.sleep(8)
         
         data = {"user": TIKTOK_USER, "updated": datetime.now().isoformat()}
         
-        # ── FOLLOWERS ──
-        try:
-            followers_el = driver.find_element(By.CSS_SELECTOR, '[data-e2e="followers-count"], strong[data-e2e*="followers"]')
-            data["followers"] = followers_el.text.strip()
-        except:
-            try:
-                # Fallback: find number near "Followers"
-                text = driver.find_element(By.TAG_NAME, 'body').text
-                m = re.search(r'(\d[\d,.]*[KMB]?)\s*Followers?', text)
-                if m: data["followers"] = m.group(1)
-            except: pass
+        # Method 1: Extract from UNIVERSAL_DATA
+        html = driver.page_source
+        m = re.search(r'<script[^>]*id="__UNIVERSAL_DATA_FOR_REHYDRATION__"[^>]*>(.*?)</script>', html)
         
-        # ── LIKES (total) ──
-        try:
-            likes_el = driver.find_element(By.CSS_SELECTOR, '[data-e2e="likes-count"], strong[data-e2e*="likes"]')
-            data["total_likes"] = likes_el.text.strip()
-        except:
-            try:
-                text = driver.find_element(By.TAG_NAME, 'body').text
-                m = re.search(r'(\d[\d,.]*[KMB]?)\s*Likes?', text)
-                if m: data["total_likes"] = m.group(1)
-            except: pass
-        
-        # ── VIDEOS ──
-        videos = []
-        driver.execute_script("window.scrollBy(0, 1000);")
-        time.sleep(3)
-        
-        # Find video items
-        video_items = driver.find_elements(By.CSS_SELECTOR, '[data-e2e="user-post-item"], div[class*="DivItemContainer"]')
-        if not video_items:
-            video_items = driver.find_elements(By.CSS_SELECTOR, 'a[href*="/video/"]')
-        
-        for item in video_items[:10]:
-            try:
-                # Get href
-                href = item.get_attribute("href")
-                link = href if href else item.find_element(By.TAG_NAME, 'a').get_attribute("href")
+        if m:
+            import json as j
+            ud = j.loads(m.group(1))
+            ui = ud['__DEFAULT_SCOPE__']['webapp.user-detail']['userInfo']
+            
+            data["followers"] = ui['stats']['followerCount']
+            data["total_likes"] = ui['stats']['heartCount']
+            data["video_count"] = ui['stats']['videoCount']
+            data["nickname"] = ui['user']['nickname']
+            
+            log(f"  👥 {data['followers']:,} followers | ❤️ {data['total_likes']:,} likes | 🎬 {data['video_count']} videos")
+            
+            # Method 2: Scroll to load videos, then get from page
+            for i in range(6):
+                driver.execute_script("window.scrollBy(0, 1000);")
+                time.sleep(2)
+            
+            # Get all video links + aria labels
+            videos = []
+            links = driver.find_elements(By.CSS_SELECTOR, 'a[href*="/video/"]')
+            seen = set()
+            
+            for link in links:
+                href = link.get_attribute("href")
+                aria = link.get_attribute("aria-label") or link.text or ""
                 
-                # Get views from aria-label or nearby text
-                aria = item.get_attribute("aria-label")
-                if not aria:
-                    aria = item.text
-                
-                views_match = re.search(r'([\d,.]+[KMB]?)\s*(views|view)', aria, re.IGNORECASE) if aria else None
-                views = views_match.group(1) if views_match else "?"
-                
-                videos.append({"link": link, "views": views, "desc": (aria or "")[:100]})
-            except:
-                pass
+                if href and href not in seen:
+                    seen.add(href)
+                    # Parse views from aria
+                    views = 0
+                    vm = re.search(r'([\d,.]+[KMB]?)\s*(views|view|lượt)', aria, re.IGNORECASE)
+                    if vm:
+                        vs = vm.group(1).replace(',', '')
+                        if 'K' in vs: views = int(float(vs.replace('K','')) * 1000)
+                        elif 'M' in vs: views = int(float(vs.replace('M','')) * 1000000)
+                        elif 'B' in vs: views = int(float(vs.replace('B','')) * 1000000000)
+                        else: views = int(vs)
+                    
+                    videos.append({"link": href, "views": views, "desc": aria[:80]})
+            
+            videos.sort(key=lambda x: x['views'], reverse=True)
+            data["videos"] = videos[:15]
+            
+            total_views = sum(v['views'] for v in videos)
+            data["total_views"] = total_views
+            
+            log(f"  📹 {len(videos)} videos scraped | 👁️ {total_views:,} total views")
+            for v in videos[:5]:
+                log(f"    👁️{v['views']:,} | {v['desc'][:60]}")
         
-        data["videos"] = videos
-        data["video_count"] = len(videos)
-        
-        # Save
+        # Save local
         with open(DATA_FILE, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
         
-        # Print summary
-        print(f"  👥 Followers: {data.get('followers', '?')}")
-        print(f"  ❤️ Total Likes: {data.get('total_likes', '?')}")
-        print(f"  📹 Videos scraped: {len(videos)}")
-        for v in videos:
-            print(f"    👁️ {v['views']} | {v.get('desc','')[:60]}")
-        
         # Send to VPS
         try:
-            requests.post("http://72.60.232.73:8765/tiktok", json=data, timeout=10)
-            print("  📤 Sent to dashboard!")
-        except:
-            print("  ⚠️ VPS not reachable")
+            r = requests.post(VPS_URL, json=data, timeout=10)
+            log(f"  📤 Sent to dashboard! ({r.status_code})")
+        except Exception as e:
+            log(f"  ⚠️ VPS not reachable: {e}")
         
         return data
         
@@ -109,4 +108,4 @@ def scrape_tiktok():
         driver.quit()
 
 if __name__ == "__main__":
-    scrape_tiktok()
+    scrape()
