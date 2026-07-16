@@ -5,7 +5,7 @@
     "from": "MdRocky Bai\nYou're now friends with MdRocky.\n  ·\n1y",
     "nick": "FB_Duong_da_Thao"
   },
-  "_updated": "16/07/2026 04:22",
+  "_updated": "16/07/2026 04:28",
   "FB_Bui_Xuyen_inbox_Đại Đạo\nTin nhắn chưa đọc:\nTin nhắn và cuộc gọi đư_2026071410": {
     "time": "2026-07-14T10:04:24.801255",
     "type": "inbox",
@@ -366,60 +366,87 @@
     "message_time": null
   },
   "user": "nhasachcungsenbot",
-  "updated": "2026-07-16T11:21:57.810074",
-  "followers": "1546",
-  "total_likes": "134.8K",
+  "updated": "2026-07-16T11:28:35.489624",
+  "followers": 1546,
+  "total_likes": 134800,
   "videos": [
     {
       "link": "https://www.tiktok.com/@nhasachcungsenbot/video/7579859413683440914",
-      "views": "?",
+      "views": 0,
       "desc": "568.7K\nPinned"
     },
     {
-      "link": "https://www.tiktok.com/@nhasachcungsenbot/video/7579859413683440914",
-      "views": "?",
-      "desc": "Watch in full screen"
-    },
-    {
       "link": "https://www.tiktok.com/@nhasachcungsenbot/video/7582132582851054856",
-      "views": "?",
+      "views": 0,
       "desc": "429.5K\nPinned"
     },
     {
-      "link": "https://www.tiktok.com/@nhasachcungsenbot/video/7582132582851054856",
-      "views": "?",
-      "desc": "Watch in full screen"
-    },
-    {
       "link": "https://www.tiktok.com/@nhasachcungsenbot/video/7586536756913212693",
-      "views": "?",
+      "views": 0,
       "desc": "4.2M\nPinned"
     },
     {
-      "link": "https://www.tiktok.com/@nhasachcungsenbot/video/7586536756913212693",
-      "views": "?",
-      "desc": "Watch in full screen"
-    },
-    {
       "link": "https://www.tiktok.com/@nhasachcungsenbot/video/7662607093614054677",
-      "views": "?",
+      "views": 0,
       "desc": "380"
     },
     {
-      "link": "https://www.tiktok.com/@nhasachcungsenbot/video/7662607093614054677",
-      "views": "?",
-      "desc": "Watch in full screen"
-    },
-    {
       "link": "https://www.tiktok.com/@nhasachcungsenbot/video/7662263092377603349",
-      "views": "?",
+      "views": 0,
       "desc": "387"
     },
     {
-      "link": "https://www.tiktok.com/@nhasachcungsenbot/video/7662263092377603349",
-      "views": "?",
-      "desc": "Watch in full screen"
+      "link": "https://www.tiktok.com/@nhasachcungsenbot/video/7661944013917834517",
+      "views": 0,
+      "desc": "350"
+    },
+    {
+      "link": "https://www.tiktok.com/@nhasachcungsenbot/video/7661497677099699477",
+      "views": 0,
+      "desc": "484"
+    },
+    {
+      "link": "https://www.tiktok.com/@nhasachcungsenbot/video/7661142234930236692",
+      "views": 0,
+      "desc": "380"
+    },
+    {
+      "link": "https://www.tiktok.com/@nhasachcungsenbot/video/7660822303760010516",
+      "views": 0,
+      "desc": "396"
+    },
+    {
+      "link": "https://www.tiktok.com/@nhasachcungsenbot/video/7660377843498552596",
+      "views": 0,
+      "desc": "446"
+    },
+    {
+      "link": "https://www.tiktok.com/@nhasachcungsenbot/video/7660017202480893205",
+      "views": 0,
+      "desc": "431"
+    },
+    {
+      "link": "https://www.tiktok.com/@nhasachcungsenbot/video/7659657710702578965",
+      "views": 0,
+      "desc": "622"
+    },
+    {
+      "link": "https://www.tiktok.com/@nhasachcungsenbot/video/7659308890135285013",
+      "views": 0,
+      "desc": "514"
+    },
+    {
+      "link": "https://www.tiktok.com/@nhasachcungsenbot/video/7658893340569505045",
+      "views": 0,
+      "desc": "445"
+    },
+    {
+      "link": "https://www.tiktok.com/@nhasachcungsenbot/video/7658544885942766868",
+      "views": 0,
+      "desc": "409"
     }
   ],
-  "video_count": 10
+  "video_count": 345,
+  "nickname": "Nhà sạch cùng SenBot",
+  "total_views": 0
 }
