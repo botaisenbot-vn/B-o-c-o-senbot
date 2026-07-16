@@ -71,7 +71,7 @@ def scrape():
                     seen.add(href)
                     # Parse views from aria
                     views = 0
-                    vm = re.search(r'([\d,.]+[KMB]?)\s*(views|view|lượt)', aria, re.IGNORECASE)
+                    vm = re.search(r'([\d,.]+[KMB]?)\s*(views|view|lượt|lượt xem)', aria, re.IGNORECASE)
                     if vm:
                         vs = vm.group(1).replace(',', '')
                         if 'K' in vs: views = int(float(vs.replace('K','')) * 1000)
