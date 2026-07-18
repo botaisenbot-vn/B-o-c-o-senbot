@@ -34,13 +34,65 @@ td{padding:8px 10px;border-bottom:1px solid #f0f0f0}
 </style>
 </head>
 <body>
-<div class="header"><h1>Senbot Dashboard</h1><span>16/07/2026 — Doanh số sỉ cập nhật</span></div>
+<div class="header"><h1>Senbot Dashboard</h1><span>16/07/2026 — Dashboard đầy đủ</span></div>
 <div class="container">
 <div class="tabs"><button class="tab active" onclick="openTab(event,'tai_chinh')">💰 Tai chinh</button><button class="tab" onclick="openTab(event,'kinh_doanh')">🛒 Kinh doanh</button><button class="tab" onclick="openTab(event,'marketing')">📢 Marketing</button><button class="tab" onclick="openTab(event,'inbox')">📬 Inbox</button></div>
 <div id="tai_chinh" class="tab-content" style="display:block">
-<div style="text-align:center;padding:40px;color:#999">Chua co du lieu</div>
+<div class="report"><div class="rtitle">TỔNG KẾT THU CHI — THÁNG 7/2026 (2 TUẦN ĐẦU)</div><div class="rbody">
+<div class="split">
+<div><div style="font-size:22px;font-weight:700">589M / 156M</div><div class="small">💰 Doanh thu (T1 / T2)</div></div>
+<div><div style="font-size:22px;font-weight:700">350M / 108M</div><div class="small">💸 Chi phí (T1 / T2)</div></div>
+<div><div style="font-size:22px;font-weight:700">239M / 48M</div><div class="small">📈 Lãi gộp (T1 / T2)</div></div>
+<div><div style="font-size:22px;font-weight:700">40.6% / 30.8%</div><div class="small">📊 Biên lợi nhuận</div></div>
+</div>
+<h3>📊 DOANH THU</h3>
+<table>
+<tr><th></th><th>Tuần 1 (1-7/7)</th><th>Tuần 2 (8-14/7)</th><th>Tổng</th></tr>
+<tr><td class="">Doanh thu</td><td class="num">589M</td><td class="num">156M</td><td class="num">745M</td></tr>
+<tr><td class="">Số giao dịch</td><td class="num">~48 đơn</td><td class="num">~15 đơn</td><td class="num">~63 đơn</td></tr>
+</table>
+<h3>💸 CHI PHÍ</h3>
+<table>
+<tr><th></th><th>Tuần 1</th><th>Tuần 2</th></tr>
+<tr><td class="">Tổng chi phí thực</td><td class="num">350M</td><td class="num">108M</td></tr>
+<tr><td class="">Nộp quỹ (không phải CP)</td><td class="num">3M</td><td class="num">63M</td></tr>
+</table>
+<div class="conclusion">Lãi gộp T1 239M (40.6%), T2 giảm còn 48M (30.8%). Cần kiểm tra doanh thu T2 thấp bất thường.</div>
+</div></div>
 </div>
 <div id="kinh_doanh" class="tab-content" >
+<div class="report"><div class="rtitle">KINH DOANH — Hằng Đỗ</div><div class="rbody">
+<div class="split">
+<div><div style="font-size:22px;font-weight:700">7 đơn</div><div class="small">📦 Tuần 1</div></div>
+<div><div style="font-size:22px;font-weight:700">7 đơn</div><div class="small">📦 Tuần 2</div></div>
+<div><div style="font-size:22px;font-weight:700">27%</div><div class="small">🎯 Tỷ lệ chốt</div></div>
+<div><div style="font-size:22px;font-weight:700">29 inbox</div><div class="small">💬 Inbox</div></div>
+</div>
+<h3>📊 So sánh 2 tuần</h3>
+<table>
+<tr><th></th><th>Tuần 1</th><th>Tuần 2</th></tr>
+<tr><td class="">Đơn</td><td class="num">7</td><td class="num">7</td></tr>
+<tr><td class="">Inbox</td><td class="num">29</td><td class="num">—</td></tr>
+<tr><td class="">Tỷ lệ chốt</td><td class="num">27%</td><td class="num">—</td></tr>
+</table>
+<div class="conclusion">Hằng Đỗ ổn định 7 đơn/tuần, tỷ lệ chốt 27% tốt.</div>
+</div></div>
+<div class="report"><div class="rtitle">KINH DOANH — Bùi Quang Hiếu</div><div class="rbody">
+<div class="split">
+<div><div style="font-size:22px;font-weight:700">8 đơn</div><div class="small">📦 Tuần 1</div></div>
+<div><div style="font-size:22px;font-weight:700">—</div><div class="small">📦 Tuần 2</div></div>
+<div><div style="font-size:22px;font-weight:700">33%</div><div class="small">🎯 Tỷ lệ chốt</div></div>
+<div><div style="font-size:22px;font-weight:700">24 inbox</div><div class="small">💬 Inbox</div></div>
+</div>
+<h3>📊 So sánh</h3>
+<table>
+<tr><th></th><th>Tuần 1</th><th>Tuần 2</th></tr>
+<tr><td class="">Đơn</td><td class="num">8</td><td class="num">—</td></tr>
+<tr><td class="">Inbox</td><td class="num">24</td><td class="num">—</td></tr>
+<tr><td class="">Tỷ lệ chốt</td><td class="num">33%</td><td class="num">—</td></tr>
+</table>
+<div class="conclusion">Hiếu 8 đơn T1, tỷ lệ chốt 33% rất tốt.</div>
+</div></div>
 <div class="report"><div class="rtitle">DOANH SỐ SỈ — THÁNG 7/2026</div><div class="rbody">
 <div class="split">
 <div><div style="font-size:22px;font-weight:700">31 đơn / 498.1M</div><div class="small">🟢 L1 (Sỉ loại 1)</div></div>
@@ -58,9 +110,8 @@ td{padding:8px 10px;border-bottom:1px solid #f0f0f0}
 <tr><td class="">S9 steam pro</td><td class="num">3</td><td class="num">51,800,000đ</td></tr>
 <tr><td class="">T50s</td><td class="num">4</td><td class="num">49,950,000đ</td></tr>
 <tr><td class="">T30e</td><td class="num">4</td><td class="num">40,100,000đ</td></tr>
-<tr><td class="">T30c</td><td class="num">3</td><td class="num">32,150,000đ</td></tr>
 </table>
-<h3>🟢 L1 (Sỉ loại 1) — Top đơn</h3>
+<h3>🟢 L1 Top đơn</h3>
 <table>
 <tr><th>Ngày</th><th>Model</th><th>Giá</th></tr>
 <tr><td class="">6/7</td><td class="num">T90 pro omni</td><td class="num">30,700,000đ</td></tr>
@@ -69,7 +120,7 @@ td{padding:8px 10px;border-bottom:1px solid #f0f0f0}
 <tr><td class="">2/7</td><td class="num">S9 station</td><td class="num">27,840,000đ</td></tr>
 <tr><td class="">10/7</td><td class="num">S9 steam pro</td><td class="num">25,900,000đ</td></tr>
 </table>
-<h3>🔵 L2 (Sỉ loại 2) — Top đơn</h3>
+<h3>🔵 L2 Top đơn</h3>
 <table>
 <tr><th>Ngày</th><th>Model</th><th>Giá</th></tr>
 <tr><td class="">15/7</td><td class="num">T50s</td><td class="num">27,100,000đ</td></tr>
@@ -82,10 +133,55 @@ td{padding:8px 10px;border-bottom:1px solid #f0f0f0}
 </div></div>
 </div>
 <div id="marketing" class="tab-content" >
-<div style="text-align:center;padding:40px;color:#999">Chua co du lieu</div>
+<div class="report"><div class="rtitle">MARKETING — Thùy Dương</div><div class="rbody">
+<div class="split">
+<div><div style="font-size:22px;font-weight:700">3 bài</div><div class="small">📝 Content T2</div></div>
+<div><div style="font-size:22px;font-weight:700">22 bài</div><div class="small">🌱 Seeding T2</div></div>
+<div><div style="font-size:22px;font-weight:700">5 leads</div><div class="small">🎯 Leads T2</div></div>
+<div><div style="font-size:22px;font-weight:700">🔴</div><div class="small">ADS trống!</div></div>
+</div>
+<h3>📊 So sánh tuần</h3>
+<table>
+<tr><th></th><th>Tuần 1</th><th>Tuần 2</th></tr>
+<tr><td class="">Content</td><td class="num">10 bài</td><td class="num">3 bài 🔻70%</td></tr>
+<tr><td class="">Seeding</td><td class="num">57 bài</td><td class="num">22 bài 🔻61%</td></tr>
+<tr><td class="">Leads</td><td class="num">7</td><td class="num">5</td></tr>
+<tr><td class="">ADS</td><td class="num">Trống</td><td class="num">Trống</td></tr>
+</table>
+<div class="conclusion">⚠️ Content & seeding giảm mạnh. ADS trống 2 tuần — cần đẩy ngay!</div>
+</div></div>
+<div class="report"><div class="rtitle">MARKETING — Thu Chinh (Video)</div><div class="rbody">
+<div class="split">
+<div><div style="font-size:22px;font-weight:700">8 video</div><div class="small">🎬 T2</div></div>
+<div><div style="font-size:22px;font-weight:700">43%</div><div class="small">📈 Hook rate</div></div>
+<div><div style="font-size:22px;font-weight:700">—</div><div class="small">👁️ Views</div></div>
+<div><div style="font-size:22px;font-weight:700">⚠️</div><div class="small">Dưới KPI 50%</div></div>
+</div>
+<h3>📊 So sánh</h3>
+<table>
+<tr><th></th><th>Tuần 1</th><th>Tuần 2</th></tr>
+<tr><td class="">Video</td><td class="num">12</td><td class="num">8 🔻33%</td></tr>
+<tr><td class="">Facebook</td><td class="num">Giảm mạnh</td><td class="num">—</td></tr>
+<tr><td class="">Hook rate</td><td class="num">—</td><td class="num">43%</td></tr>
+</table>
+<div class="conclusion">Video giảm, hook rate 43% dưới mục tiêu 50%. Cần cải thiện chất lượng.</div>
+</div></div>
 </div>
 <div id="inbox" class="tab-content" >
-<div style="text-align:center;padding:40px;color:#999">Chua co du lieu</div>
+<div class="report"><div class="rtitle">FB CLONE INBOX — Tin Nhắn & Thông Báo</div><div class="rbody">
+<div class="split">
+<div><div style="font-size:22px;font-weight:700">—</div><div class="small">💬 Tin nhắn mới</div></div>
+<div><div style="font-size:22px;font-weight:700">—</div><div class="small">🔔 Thông báo</div></div>
+<div><div style="font-size:22px;font-weight:700">—</div><div class="small">👤 Nick hoạt động</div></div>
+<div><div style="font-size:22px;font-weight:700">—</div><div class="small">🕐 Cập nhật</div></div>
+</div>
+<h3>📬 Tin nhắn gần đây</h3>
+<table>
+<tr><th>Nick</th><th>Loại</th><th>Nội dung</th><th>Thời gian</th></tr>
+<tr><td class="">Chưa có dữ liệu</td><td class="num"></td><td class="num">Chạy CHECK_INBOX.bat để bắt đầu</td><td class="num"></td></tr>
+</table>
+<div class="conclusion">Dữ liệu tự động cập nhật mỗi 30 phút từ máy Đại Ca.</div>
+</div></div>
 </div>
 
 </div>
