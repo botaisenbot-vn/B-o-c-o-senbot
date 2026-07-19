@@ -1,59 +1,51 @@
 {
-  "updated": "18/07/2026 13:30 — Tuần 3",
+  "updated": "18/07/2026 13:45 — Tuần 3",
   "sections": [
     {
       "type": "pnl",
-      "title": "TỔNG KẾT THU CHI — THÁNG 7/2026",
+      "title": "TỔNG KẾT THU CHI — THÁNG 7/2026 (Tuần 3: 15-21/7)",
       "kpis": [
         {
-          "val": "589M / 156M / 351M",
-          "label": "💰 Doanh thu (T1/T2/T3)"
+          "val": "416M",
+          "label": "💰 Doanh thu T3"
         },
         {
-          "val": "350M / 108M / —",
-          "label": "💸 Chi phí (T1/T2/T3)"
+          "val": "3M",
+          "label": "💸 Chi phí T3"
         },
         {
-          "val": "239M / 48M / —",
-          "label": "📈 Lãi gộp (T1/T2/T3)"
+          "val": "412M (99.2%)",
+          "label": "📈 Lãi gộp T3"
         },
         {
-          "val": "~1.096M",
-          "label": "📊 Tổng DT 3 tuần"
+          "val": "0.42 tỷ",
+          "label": "📊 Lũy kế tháng 7"
         }
       ],
       "tables": [
         {
-          "title": "📊 DOANH THU",
+          "title": "📊 DOANH THU T3",
           "headers": [
-            "",
-            "Tuần 1",
-            "Tuần 2",
-            "Tuần 3 (15-18/7)"
+            "Kênh",
+            "Doanh thu"
           ],
           "rows": [
             [
-              "Doanh thu",
-              "589M",
-              "156M",
-              "351.6M"
-            ],
-            [
               "Sỉ",
-              "—",
-              "—",
-              "239.1M"
+              "284,545,000đ"
             ],
             [
               "Lẻ",
-              "—",
-              "—",
-              "112.5M"
+              "117,693,412đ"
+            ],
+            [
+              "Dịch vụ",
+              "13,574,000đ"
             ]
           ]
         }
       ],
-      "conclusion": "T3: 351.6M (4 ngày), sỉ 239.1M + lẻ 112.5M. Chi phí đang cập nhật."
+      "conclusion": "T3 (4 ngày đầu): DT 415,812,412đ, CP 3,327,000đ, Lãi 412,485,412đ (99.2%)."
     },
     {
       "type": "sales",
@@ -157,143 +149,23 @@
     },
     {
       "type": "si",
-      "title": "DOANH SỐ SỈ — THÁNG 7/2026",
+      "title": "DOANH SỐ SỈ — Tuần 3 (15-21/7)",
       "kpis": [
         {
-          "val": "31 đơn / 498.1M",
-          "label": "🟢 L1 (Sỉ loại 1)"
+          "val": "116,220,000đ",
+          "label": "🟢 L1 T3"
         },
         {
-          "val": "17 đơn / 242.1M",
-          "label": "🔵 L2 (Sỉ loại 2)"
+          "val": "53,400,000đ",
+          "label": "🔵 L2 T3"
         },
         {
-          "val": "48 đơn",
-          "label": "📦 Tổng đơn"
-        },
-        {
-          "val": "740,190,000đ",
-          "label": "💰 Tổng doanh số"
+          "val": "169,620,000đ",
+          "label": "💰 Tổng SI T3"
         }
       ],
-      "tables": [
-        {
-          "title": "🏆 Top Model Sỉ",
-          "headers": [
-            "Model",
-            "Đơn",
-            "Doanh số"
-          ],
-          "rows": [
-            [
-              "X12 cyclone",
-              "5",
-              "85,700,000đ"
-            ],
-            [
-              "S9 station",
-              "4",
-              "83,660,000đ"
-            ],
-            [
-              "X11 cyclone",
-              "4",
-              "75,250,000đ"
-            ],
-            [
-              "T90 pro omni",
-              "4",
-              "61,500,000đ"
-            ],
-            [
-              "S9 steam pro",
-              "3",
-              "51,800,000đ"
-            ],
-            [
-              "T50s",
-              "4",
-              "49,950,000đ"
-            ],
-            [
-              "T30e",
-              "4",
-              "40,100,000đ"
-            ]
-          ]
-        },
-        {
-          "title": "🟢 L1 Top đơn",
-          "headers": [
-            "Ngày",
-            "Model",
-            "Giá"
-          ],
-          "rows": [
-            [
-              "6/7",
-              "T90 pro omni",
-              "30,700,000đ"
-            ],
-            [
-              "10/7",
-              "T90 tự cấp xả",
-              "30,550,000đ"
-            ],
-            [
-              "17/7",
-              "S9 station",
-              "27,980,000đ"
-            ],
-            [
-              "2/7",
-              "S9 station",
-              "27,840,000đ"
-            ],
-            [
-              "10/7",
-              "S9 steam pro",
-              "25,900,000đ"
-            ]
-          ]
-        },
-        {
-          "title": "🔵 L2 Top đơn",
-          "headers": [
-            "Ngày",
-            "Model",
-            "Giá"
-          ],
-          "rows": [
-            [
-              "15/7",
-              "T50s",
-              "27,100,000đ"
-            ],
-            [
-              "3/7",
-              "X12 cyclone",
-              "21,400,000đ"
-            ],
-            [
-              "2/7",
-              "X12 cyclone",
-              "21,300,000đ"
-            ],
-            [
-              "10/7",
-              "X11 cyclone",
-              "17,800,000đ"
-            ],
-            [
-              "16/7",
-              "T90 tự cấp xả",
-              "15,450,000đ"
-            ]
-          ]
-        }
-      ],
-      "conclusion": "Tổng 48 đơn, 740.2M. L1 chiếm 67% doanh số (498.1M), L2 chiếm 33% (242.1M). Top model: X12 cyclone & S9 station."
+      "tables": [],
+      "conclusion": "SI T3 (4 ngày): L1=116,220,000đ, L2=53,400,000đ, Tổng=169,620,000đ"
     },
     {
       "type": "marketing",
