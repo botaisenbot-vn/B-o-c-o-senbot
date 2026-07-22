@@ -1,30 +1,30 @@
 {
-  "updated": "18/07/2026 13:45 — Tuần 3",
+  "updated": "18/07/2026 14:00 — Tuần 3 đầy đủ",
   "sections": [
     {
       "type": "pnl",
-      "title": "TỔNG KẾT THU CHI — THÁNG 7/2026 (Tuần 3: 15-21/7)",
+      "title": "TỔNG KẾT THU CHI — Tuần 3 (15-18/7)",
       "kpis": [
         {
-          "val": "416M",
+          "val": "501M",
           "label": "💰 Doanh thu T3"
         },
         {
-          "val": "3M",
+          "val": "604M",
           "label": "💸 Chi phí T3"
         },
         {
-          "val": "412M (99.2%)",
-          "label": "📈 Lãi gộp T3"
+          "val": "-103M (-20.6%)",
+          "label": "📈 Lãi gộp"
         },
         {
-          "val": "0.42 tỷ",
-          "label": "📊 Lũy kế tháng 7"
+          "val": "1.25 tỷ",
+          "label": "📊 Lũy kế T7"
         }
       ],
       "tables": [
         {
-          "title": "📊 DOANH THU T3",
+          "title": "📊 DOANH THU",
           "headers": [
             "Kênh",
             "Doanh thu"
@@ -32,20 +32,53 @@
           "rows": [
             [
               "Sỉ",
-              "284,545,000đ"
+              "350,835,000đ"
             ],
             [
               "Lẻ",
-              "117,693,412đ"
+              "133,875,747đ"
             ],
             [
               "Dịch vụ",
-              "13,574,000đ"
+              "15,875,253đ"
+            ],
+            [
+              "TỔNG",
+              "500,586,000đ"
+            ]
+          ]
+        },
+        {
+          "title": "💸 CHI PHÍ",
+          "headers": [
+            "Danh mục",
+            "Số tiền"
+          ],
+          "rows": [
+            [
+              "CP Nhập hàng (COGS)",
+              "600,000,000đ"
+            ],
+            [
+              "CP Kỹ thuật & Sửa chữa",
+              "2,050,000đ"
+            ],
+            [
+              "CP Vận chuyển",
+              "877,000đ"
+            ],
+            [
+              "Hoàn tiền khách hàng",
+              "400,000đ"
+            ],
+            [
+              "CP Khác",
+              "200,000đ"
             ]
           ]
         }
       ],
-      "conclusion": "T3 (4 ngày đầu): DT 415,812,412đ, CP 3,327,000đ, Lãi 412,485,412đ (99.2%)."
+      "conclusion": "T3 (4 ngày): DT 500,586,000đ, CP 603,527,000đ, Lãi -102,941,000đ (-20.6%)."
     },
     {
       "type": "sales",
